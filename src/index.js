@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
 import './index.css';
-
-
-class Title extends React.Component {
-  render() {
-    return (
-      <div> Nutrifficient </div>
-    );
-  }
-}
+import App from './App';
 
 ReactDOM.render(
-  <Title />,
+  <App />,
   document.getElementById('root')
 );
