@@ -6,6 +6,6 @@ import App from './App';
 import Welcome from './Welcome';
 
 ReactDOM.render(
-  <Welcome />,
+  <App />,
   document.getElementById('root')
 );

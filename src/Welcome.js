@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import LoginBox from './components/LoginBox/LoginBox';
 import RegisterBox from './components/RegisterBox/RegisterBox';
 import "./Welcome.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import App from './App';
 
 class Welcome extends React.Component {
   constructor (props) {
@@ -24,6 +26,7 @@ class Welcome extends React.Component {
 
   render() {
     return (
+      <Router>
       <div className = "root-container">
         <div className = "box-container">
           {this.state.isLoginOpen && <LoginBox />}
@@ -40,6 +43,8 @@ class Welcome extends React.Component {
           </div> 
         </div>
       </div>
+        <Route path = "/App" component = {App} />
+      </Router>
     );
   }
 }
