@@ -1,31 +1,30 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import history from './history';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Title from './components/Title';
-import Navbar from "./components/navbar.component"
-import FoodsList from "./components/foods-list.component";
-import EditFood from "./components/edit-food.component";
-import CreateFood from "./components/create-food.component";
-import CreateUser from "./components/create-user.component";
+
 import Welcome from "./Welcome";
- 
-function App() {
- return (
-     <Welcome>
-        <Router>
-            <div className="container">
-                <Title />
-                <Navbar />
-                <br/>
-                <Route path="/" exact component={FoodsList} />
-                <Route path="/edit/:id" component={EditFood} />
-                <Route path="/create" component={CreateFood} />
-                <Route path="/user" component={CreateUser} />
+import Homepage from "./Homepage";
+
+
+const routes = (
+    <Router history={history}>                          
+        <Route path="/" component= {Welcome} />
+        <Route path="/homepage" component= {Homepage} />
+    </Router>
+)
+//took out switch from router
+
+
+class App extends React.Component{
+    render() {
+        return (
+            <div className = "app-routes">
+               {routes}
             </div>
-        </Router>
-     </Welcome>
- );
+        );
+    }
 }
  
 export default App;

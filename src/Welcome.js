@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginBox from './components/LoginBox/LoginBox';
+import LoginBox from './LoginBox';
 import RegisterBox from './components/RegisterBox/RegisterBox';
 import "./Welcome.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -43,7 +43,6 @@ class Welcome extends React.Component {
           </div> 
         </div>
       </div>
-        <Route path = "/App" component = {App} />
       </Router>
     );
   }

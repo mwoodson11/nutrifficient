@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+import "bootstrap/dist/css/bootstrap.min.css";
+import history from './history';
 
 class LoginBox extends React.Component {
 
@@ -34,6 +37,9 @@ class LoginBox extends React.Component {
       this.setState({errors});
       return;
     }
+    //store.set('loggedIn', true);
+    history.push('/homepage');
+
     //this.props.history.push("/App");
     //if no error, go to home page.
   }

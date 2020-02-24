@@ -6,11 +6,11 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-        <Link to="/" className="navbar-brand">Nutrifficient</Link>
+        <Link to="/foodslist" className="navbar-brand">Nutrifficient</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
-          <Link to="/" className="nav-link">Foods</Link>
+          <Link to="/foodslist" className="nav-link">Foods</Link>
           </li>
           <li className="navbar-item">
           <Link to="/create" className="nav-link">Create Food Log</Link>
