@@ -10,6 +10,30 @@ const userSchema = new Schema({
     trim: true,
     minlength: 3
   },
+  email: {
+  type: String,
+  required: true,
+  unique: true,
+  trim: true
+  },
+  password: {
+    type: String,
+    required: true,
+    unique: false,
+    trim: true
+  },
+  height: {
+    type: Number,
+    required: false,
+  },
+  weight: {
+    type: Number,
+    required: false,
+  },
+  gender: {
+    type: Number,
+    required: false
+  }
 }, {
   timestamps: true,
 });

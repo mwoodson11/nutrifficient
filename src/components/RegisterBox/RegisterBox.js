@@ -47,7 +47,10 @@ class RegisterBox extends React.Component {
     const newUser = {
       username: this.state.username,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      height: 0,
+      weight: 0,
+      gender: 0
     };
     console.log(newUser);
     axios.post('http://localhost:5000/users/add', newUser)
@@ -56,7 +59,10 @@ class RegisterBox extends React.Component {
     this.setState({
       username: '',
       email: '',
-      password: ''
+      password: '',
+      height: 0,
+      weight: 0,
+      gender: 0
     })
   }
 

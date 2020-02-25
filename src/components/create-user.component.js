@@ -8,10 +8,25 @@ export default class CreateUser extends Component {
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-          username: ''
+          username: '',
+          email: '',
+          password: '',
+          height: 0,
+          weight: 0,
+          gender: 0
         };
       }
 
+      onChangeUsername(e) {
+        this.setState({
+          username: e.target.value
+        });
+      }
+      onChangeEmail(e) {
+        this.setState({
+          email: e.target.value
+        });
+      }
       onChangeUsername(e) {
         this.setState({
           username: e.target.value
@@ -21,6 +36,11 @@ export default class CreateUser extends Component {
         e.preventDefault();
         const newUser = {
           username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          height: this.state.height,
+          weight: this.state.weight,
+          gender: this.state.gender,
         };
         console.log(newUser);
         axios.post('http://localhost:5000/users/add', newUser)
