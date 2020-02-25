@@ -179,3 +179,10 @@ $blue_theme: #70a1ff;
 .show {
     visibility: visible;
 }
+
+.image {
+    flex: 1;
+    width: null;
+    height: null;
+    resizeMode: 'contain';
+}

@@ -5,9 +5,9 @@ import axios from 'axios';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import "bootstrap/dist/css/bootstrap.min.css";
-import history from './history';
-import App from './App';
-import Homepage from './Homepage';
+import history from '../../history';
+import App from '../App/App';
+import Homepage from '../Homepage/Homepage';
 
 class LoginBox extends React.Component {
 
@@ -50,9 +50,6 @@ class LoginBox extends React.Component {
   render() {
     return (
       <div className="inner-container">
-        <div className="header">
-          Login
-        </div>
         <div className="box">
           <form onSubmit = {this.onSubmit}>
             {this.state.errors.map(error => (
@@ -100,7 +97,7 @@ class LoginBox extends React.Component {
 function validate(username, password) {
   const errors = [];
   // verify username/passcode
-  
+
 
 
   return errors;
