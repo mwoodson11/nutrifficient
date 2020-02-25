@@ -14,7 +14,6 @@ const routes = (
         <Route path="/Homepage" component= {Homepage} />
     </Router>
 )
-//took out switch from router
 
 
 class App extends React.Component{

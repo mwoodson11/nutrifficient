@@ -29,8 +29,6 @@ class Welcome extends React.Component {
       <Router>
       <div className = "root-container">
         <div className = "box-container">
-          {this.state.isLoginOpen && <LoginBox />}
-          {this.state.isRegisterOpen && <RegisterBox />}
           <div className = "box-controller">
             <div className = {"controller " + (this.state.isLoginOpen ? "selected-controller" : "")}
               onClick = {this.showLoginBox.bind(this)}>
@@ -41,6 +39,8 @@ class Welcome extends React.Component {
               Register
              </div> 
           </div> 
+          {this.state.isLoginOpen && <LoginBox />}
+          {this.state.isRegisterOpen && <RegisterBox />}
         </div>
       </div>
       </Router>

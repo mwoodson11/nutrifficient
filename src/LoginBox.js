@@ -54,7 +54,10 @@ class LoginBox extends React.Component {
           Login
         </div>
         <div className="box">
-          <form>
+          <form onSubmit = {this.onSubmit}>
+            {this.state.errors.map(error => (
+              <p key={error}>Error: {error}</p>
+            ))}
             <div className="input-group">
               <label htmlFor="username">Username</label>
               <input
@@ -97,6 +100,7 @@ class LoginBox extends React.Component {
 function validate(username, password) {
   const errors = [];
   // verify username/passcode
+  
 
 
   return errors;
