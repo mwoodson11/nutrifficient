@@ -21,7 +21,6 @@ class App extends React.Component{
     constructor(props) {
         super(props);
         this.onChangeLogin = this.onChangeLogin.bind(this);
-        this.isLoggedIn = false;
         this.state = {
             isLoggedIn: false
         };
@@ -32,7 +31,7 @@ class App extends React.Component{
     }
 
     render() {
-        if (this.isLoggedIn) {
+        if (this.props.isLoggedIn) {
             return (
             <Router>
                 <Route path = "/Homepage" component = {Homepage} />

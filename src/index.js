@@ -6,6 +6,6 @@ import App from './App';
 import Welcome from './Welcome';
 
 ReactDOM.render(
-  <App />,
+  <App isLoggedIn = {false} />,
   document.getElementById('root')
 );

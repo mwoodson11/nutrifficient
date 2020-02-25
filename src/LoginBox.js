@@ -38,17 +38,13 @@ class LoginBox extends React.Component {
     if (errors.length != 0) {
       this.setState({errors});
       return;
+
     }
-    
-    //return(
-     // <Router>
-     //   <Route path = "Homepage" component = {Homepage} />
-      //  <Redirect to = "/Homepage" />
-     // </Router>
-    //);
-    //store.set('loggedIn', true);
-    //this.props.history.push("/App");
-    //if no error, go to home page.
+  
+    ReactDOM.render(
+      <App isLoggedIn = {true} />,
+      document.getElementById('root')
+    );
   }
 
   render() {
