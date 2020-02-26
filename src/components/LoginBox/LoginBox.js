@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import history from '../../history';
 import App from '../App/App';
 import Homepage from '../Homepage/Homepage';
+import './LoginBox.css';
 
 class LoginBox extends React.Component {
 
@@ -86,7 +87,7 @@ class LoginBox extends React.Component {
               className="login-btn"
               onClick={this
               .onSubmit
-              .bind(this)}>Login</button>
+              .bind(this)}><label>Login</label></button>
           </form>
         </div>
       </div>
