@@ -70,9 +70,6 @@ class RegisterBox extends React.Component {
   render() {
     return (
       <div className="inner-container">
-        <div className="header">
-          Register
-        </div>
         <div className="box">
           <form onSubmit = {this.onSubmit}>
             {this.state.errors.map(error => (

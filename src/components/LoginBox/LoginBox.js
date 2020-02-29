@@ -5,9 +5,10 @@ import axios from 'axios';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import "bootstrap/dist/css/bootstrap.min.css";
-import history from './history';
-import App from './App';
-import Homepage from './Homepage';
+import history from '../../history';
+import App from '../App/App';
+import Homepage from '../Homepage/Homepage';
+import './LoginBox.css';
 
 class LoginBox extends React.Component {
 
@@ -78,13 +79,10 @@ class LoginBox extends React.Component {
   render() {
     return (
       <div className="inner-container">
-        <div className="header">
-          Login
-        </div>
         <div className="box">
-          <form>
-          {this.state.errors.map(error => (
-            <p key={error}>Error: {error}</p>
+          <form onSubmit = {this.onSubmit}>
+            {this.state.errors.map(error => (
+              <p key={error}>Error: {error}</p>
             ))}
             <div className="input-group">
               <label htmlFor="username">Username</label>
@@ -117,7 +115,7 @@ class LoginBox extends React.Component {
               className="login-btn"
               onClick={this
               .onSubmit
-              .bind(this)}>Login</button>
+              .bind(this)}><label>Login</label></button>
           </form>
         </div>
       </div>
@@ -141,6 +139,7 @@ function validate(username, password) {
     console.log(error);
     errors.push(error);
   }
+
 
   return errors;
 }

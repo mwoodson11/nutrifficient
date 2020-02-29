@@ -1,11 +1,11 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import history from './history';
+import history from '../../history';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-import Welcome from "./Welcome";
-import Homepage from "./Homepage";
+import Welcome from "../Welcome/Welcome";
+import Homepage from "../Homepage/Homepage";
 
 
 const routes = (
@@ -14,7 +14,6 @@ const routes = (
         <Route path="/Homepage" component= {Homepage} />
     </Router>
 )
-//took out switch from router
 
 
 class App extends React.Component{
