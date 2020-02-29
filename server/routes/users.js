@@ -7,6 +7,15 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/login/:username/:password').get((req, res) => {
+  User.find({
+    'username': req.params.username,
+    'password': req.params.password
+  })
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
   const username = req.body.username;
   const email = req.body.email;
