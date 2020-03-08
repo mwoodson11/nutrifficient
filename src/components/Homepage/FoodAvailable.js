@@ -2,8 +2,25 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import ReactTable from 'react-table-6';
+import 'react-table-6/react-table.css';
+import {makeData} from "./Utils";
+import {Link} from 'react-router-dom';
 
-export default class CreateFood extends Component {
+const Food = props => (
+  <tr>
+    <td>{props.food.username}</td>
+    <td>{props.food.description}</td>
+    <td>{props.food.servings}</td>
+    <td>{props.food.date.substring(0,10)}</td>
+    <td>
+      <Link to={"/edit/"+props.food._id}>edit</Link> | <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
+    </td>
+  </tr>
+)
+
+
+export default class FoodAvailable extends Component {
     constructor(props) {
         super(props);
 
@@ -13,13 +30,16 @@ export default class CreateFood extends Component {
         this.onChangeServings = this.onChangeServings.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.deleteFood = this.deleteFood.bind(this);
 
         this.state = {
           username: '',
           description: '',
           servings: 0,
           date: new Date(),
-          users: []
+          users: [],
+          data: makeData(),
+          foods: []
         }
       }
 
@@ -36,6 +56,36 @@ export default class CreateFood extends Component {
             .catch((error) => {
                 console.log(error);
             })
+
+        axios.get('http://localhost:5000/foods/')
+        .then(response => {
+          this.setState({ foods: response.data });
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+      }
+
+      handleDelete(id){
+        
+      }
+
+      handleEdit(id){
+
+      }
+
+      deleteFood(id) {
+        axios.delete('http://localhost:5000/foods/'+id)
+            .then(res => console.log(res.data));
+        this.setState({
+            exercises: this.state.foods.filter(el => el._id !== id)
+        })
+      }
+
+      foodList() {
+        return this.state.foods.map(currentfood => {
+          return <Food food={currentfood} deleteFood={this.deleteFood} key={currentfood._id}/>;
+        })
       }
 
       onChangeUsername(e) {
@@ -75,8 +125,50 @@ export default class CreateFood extends Component {
       }
 
   render() {
+    const {data} = this.state.foods;
     return (
       <div>
+        <h3>Food Items Available</h3>
+        <ReactTable 
+          data = {data}
+          columns = {[
+            {
+              Header: "Food",
+              //Cell:
+              accessor:"food"//this.state.foods.map(currentfood => {
+                //return this.props.food.description
+              //})
+
+            },
+            {
+              Header: "Amount",
+              id: "lastName",
+              accessor: d => d.lastName
+            },
+            {
+              Header: "",
+              Cell: row => (
+                <div>
+                    <button onClick={() => this.handleEdit(row.original)}>Edit</button>
+                    <button onClick={() => this.handleDelete(row.original)}>Delete</button>
+                </div>
+              )
+            }
+          ]}
+          defaultPageSize = {20}
+          style = {{
+            height: "400px"
+          }}
+          className='-striped -highlight'
+          />
+
+
+
+
+
+
+
+
         <h3>Create New Food Log</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
@@ -132,3 +224,5 @@ export default class CreateFood extends Component {
     )
   }
 }
+
+

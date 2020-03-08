@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "./navbar.component"
 import FoodsList from "./foods-list.component";
 import EditFood from "./edit-food.component";
-import CreateFood from "./create-food.component";
+import FoodAvailable from "./FoodAvailable";
 import CreateUser from "./create-user.component";
 
 function Homepage(){
@@ -16,7 +16,7 @@ function Homepage(){
                 <Switch>
                     <Route path="/foodslist" exact component={FoodsList} />
                     <Route path="/edit/:id" component={EditFood} />
-                    <Route path="/create" component={CreateFood} />
+                    <Route path="/create" component={FoodAvailable} />
                     <Route path="/user" component={CreateUser} />
                 </Switch>
             </Router>
