@@ -84,7 +84,7 @@ export default class EditFood extends Component {
     axios.post('http://localhost:5000/foods/update/'+this.props.match.params.id, food)
       .then(res => console.log(res.data));
     
-    window.location = '/';
+    // window.location = '/';
   }
 
   render() {

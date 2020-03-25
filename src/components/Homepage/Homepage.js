@@ -7,17 +7,28 @@ import EditFood from "./edit-food.component";
 import FoodAvailable from "./FoodAvailable";
 import CreateUser from "./create-user.component";
 
-function Homepage(){
+function Homepage(property){
     return(
         <div className="container">
             <Router>
                 <Navbar />
                 <br/>
                 <Switch>
-                    <Route path="/foodslist" exact component={FoodsList} />
+                    <Route
+                        path='/foodslist'
+                        render={(props) => <FoodsList {...props} username={property.username} />}
+                    />
                     <Route path="/edit/:id" component={EditFood} />
-                    <Route path="/create" component={FoodAvailable} />
-                    <Route path="/user" component={CreateUser} />
+                    {/* <Route path="/create" component={FoodAvailable} /> */}
+                    <Route
+                        path='/create'
+                        render={(props) => <FoodAvailable {...props} username={property.username} />}
+                    />
+                    {/* <Route path="/user" component={CreateUser} /> */}
+                    <Route
+                        path='/user'
+                        render={(props) => <CreateUser {...props} username={property.username} />}
+                    />
                 </Switch>
             </Router>
         </div>

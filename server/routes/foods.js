@@ -7,6 +7,14 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/:username').get((req, res) => {
+  Food.find({
+    'username': req.params.username,
+  })
+    .then(foods => res.json(foods))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
   const username = req.body.username;
   const description = req.body.description;

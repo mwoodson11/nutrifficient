@@ -25,14 +25,17 @@ const userSchema = new Schema({
   height: {
     type: Number,
     required: false,
+    unique: false
   },
   weight: {
     type: Number,
     required: false,
+    unique: false
   },
   gender: {
     type: Number,
-    required: false
+    required: false,
+    unique: false
   }
 }, {
   timestamps: true,

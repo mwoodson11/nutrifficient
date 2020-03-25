@@ -19,8 +19,8 @@ class LoginBox extends React.Component {
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      username: '',
-      password: '',
+      username: 'mwoodson7',
+      password: 'mwoodson7',
       // response: [],
       errors: []
     };
@@ -68,7 +68,7 @@ class LoginBox extends React.Component {
       }
     
       ReactDOM.render(
-        <App isLoggedIn = {true} />,
+        <App isLoggedIn={true} username={this.state.username}/>,
         document.getElementById('root')
       );
       });

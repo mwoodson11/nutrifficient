@@ -33,7 +33,11 @@ class App extends React.Component{
         if (this.props.isLoggedIn) {
             return (
             <Router>
-                <Route path = "/Homepage" component = {Homepage} />
+                {/* <Route path = "/Homepage" component = {Homepage} /> */}
+                <Route
+                        path='/Homepage'
+                        render={(props) => <Homepage {...props} username={this.props.username} />}
+                    />
                 <Redirect to = "/Homepage" />
             </Router>
             );

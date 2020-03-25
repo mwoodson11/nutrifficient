@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import SearchBar from './SearchBar';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ReactTable from 'react-table-6';
 import 'react-table-6/react-table.css';
 import {makeData} from "./Utils";
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 const Food = props => (
   <tr>
@@ -25,16 +26,17 @@ export default class FoodAvailable extends Component {
         super(props);
 
 
-        this.onChangeUsername = this.onChangeUsername.bind(this);
+        // this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeServings = this.onChangeServings.bind(this);
-        this.onChangeDate = this.onChangeDate.bind(this);
+        // this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.deleteFood = this.deleteFood.bind(this);
 
         this.state = {
-          username: '',
+          username: props.username,
           description: '',
+          nbbdno: 0,
           servings: 0,
           date: new Date(),
           users: [],
@@ -44,26 +46,39 @@ export default class FoodAvailable extends Component {
       }
 
       componentDidMount() {
-        axios.get('http://localhost:5000/users/')
-            .then(response => {
-                if (response.data.length > 0) {
-                this.setState({ 
-                    users: response.data.map(user => user.username),
-                    username: response.data[0].username
-                });
-                }
-        })
-            .catch((error) => {
-                console.log(error);
-            })
+        // axios.get('http://localhost:5000/users/')
+        //     .then(response => {
+        //         if (response.data.length > 0) {
+        //         this.setState({ 
+        //             users: response.data.map(user => user.username),
+        //             username: response.data[0].username
+        //         });
+        //         }
+        // })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     })
 
-        axios.get('http://localhost:5000/foods/')
+        axios.get('http://localhost:5000/foods/'+this.props.username)
         .then(response => {
           this.setState({ foods: response.data });
         })
         .catch((error) => {
             console.log(error);
         })
+      }
+
+      handleChangeValue = e => {
+        console.log(e.target.value);
+        var str = e.target.value;
+        var ndbnum = str.substr(0,str.indexOf(','));
+        var desc = str.substr(str.indexOf(',')+1);
+        console.log(ndbnum);
+        console.log(desc);
+        this.setState({
+          description: desc,
+          ndbno: ndbnum
+        });
       }
 
       handleDelete(id){
@@ -88,11 +103,11 @@ export default class FoodAvailable extends Component {
         })
       }
 
-      onChangeUsername(e) {
-        this.setState({
-          username: e.target.value
-        });
-      }
+      // onChangeUsername(e) {
+      //   this.setState({
+      //     username: e.target.value
+      //   });
+      // }
       onChangeDescription(e) {
         this.setState({
           description: e.target.value
@@ -101,11 +116,6 @@ export default class FoodAvailable extends Component {
       onChangeServings(e) {
         this.setState({
           servings: e.target.value
-        });
-      }
-      onChangeDate(date) {
-        this.setState({
-          date: date
         });
       }
 
@@ -120,12 +130,15 @@ export default class FoodAvailable extends Component {
 
       console.log(food);
       axios.post('http://localhost:5000/foods/add', food)
-        .then(res => console.log(res.data));
-      window.location = '/';
+        .then(res => {
+          console.log(res.data);
+          this.props.history.push('/create')
+        });
+      // window.location = '/create';
       }
 
   render() {
-    const {data} = this.state.foods;
+    const data = this.state.foods;
     return (
       <div>
         <h3>Food Items Available</h3>
@@ -135,15 +148,15 @@ export default class FoodAvailable extends Component {
             {
               Header: "Food",
               //Cell:
-              accessor:"food"//this.state.foods.map(currentfood => {
+              accessor:"description"//this.state.foods.map(currentfood => {
                 //return this.props.food.description
               //})
 
             },
             {
               Header: "Amount",
-              id: "lastName",
-              accessor: d => d.lastName
+              // id: "lastName",
+              accessor: "servings"
             },
             {
               Header: "",
@@ -170,32 +183,18 @@ export default class FoodAvailable extends Component {
 
 
         <h3>Create New Food Log</h3>
+
+        <SearchBar value={this.state.description} onChangeValue={this.handleChangeValue}/>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
-            <label>Username: </label>
-            <select ref="userInput"
-                required
-                className="form-control"
-                value={this.state.username}
-                onChange={this.onChangeUsername}>
-                {
-                  this.state.users.map(function(user) {
-                    return <option 
-                      key={user}
-                      value={user}>{user}
-                      </option>;
-                  })
-                }
-            </select>
-          </div>
-          <div className="form-group"> 
             <label>Description: </label>
-            <input  type="text"
+            {/* <input  type="text"
                 required
                 className="form-control"
                 value={this.state.description}
                 onChange={this.onChangeDescription}
-                />
+                /> */}
+            <div><b>{this.state.description}</b></div>
           </div>
           <div className="form-group">
             <label>Servings: </label>
