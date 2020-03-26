@@ -31,6 +31,7 @@ router.route('/add').post((req, res) => {
   const height = 0;
   const weight = 0;
   const gender = 0;
+  
 
   const newUser = new User({
     username,

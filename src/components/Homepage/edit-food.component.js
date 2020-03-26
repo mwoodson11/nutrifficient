@@ -16,9 +16,11 @@ export default class EditFood extends Component {
     this.state = {
       username: '',
       description: '',
+      ndbno: 0,
       servings: 0,
       date: new Date(),
-      users: []
+      // users: [],
+      pantry: false
     }
   }
 
@@ -28,28 +30,30 @@ export default class EditFood extends Component {
         this.setState({
           username: response.data.username,
           description: response.data.description,
+          ndbno: response.data.ndbno,
           servings: response.data.servings,
-          date: new Date(response.data.date)
+          date: new Date(response.data.date),
+          pantry: response.data.pantry
         })   
       })
       .catch(function (error) {
         console.log(error);
       })
 
-    axios.get('http://localhost:5000/users/')
-      .then(response => {
-        this.setState({ users: response.data.map(user => user.username) });
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    // axios.get('http://localhost:5000/users/')
+    //   .then(response => {
+    //     this.setState({ users: response.data.map(user => user.username) });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   })
   }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
+  // onChangeUsername(e) {
+  //   this.setState({
+  //     username: e.target.value
+  //   });
+  // }
 
   onChangeDescription(e) {
     this.setState({
@@ -75,8 +79,10 @@ export default class EditFood extends Component {
     const food = {
       username: this.state.username,
       description: this.state.description,
+      ndbno: this.state.ndbno,
       servings: this.state.servings,
       date: this.state.date,
+      pantry: this.state.pantry
     };
 
     console.log(food);
@@ -94,7 +100,7 @@ export default class EditFood extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
             <label>Username: </label>
-            <select ref="userInput"
+            {/* <select ref="userInput"
                 className="form-control"
                 value={this.state.username}
                 onChange={this.onChangeUsername}>
@@ -106,7 +112,8 @@ export default class EditFood extends Component {
                       </option>;
                   })
                 }
-            </select>
+            </select> */}
+            <div>{this.state.username}</div>
           </div>
           <div className="form-group"> 
             <label>Description: </label>

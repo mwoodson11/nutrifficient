@@ -19,7 +19,7 @@ export default class Navbar extends Component {
           <Link to = "/Homepage" className="nav-link">Suggestions</Link>
           </li>
           <li>
-            <Link to ="/Homepage" className = "nav-link">Deficiencies</Link>
+            <Link to ="/deficiency" className = "nav-link">Deficiencies</Link>
           </li>
           <li className="navbar-item">
           <Link to="/user" className="nav-link">Edit Profile</Link>

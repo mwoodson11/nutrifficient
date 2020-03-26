@@ -7,6 +7,8 @@ import ReactTable from 'react-table-6';
 import 'react-table-6/react-table.css';
 import {makeData} from "./Utils";
 import {Link, withRouter} from 'react-router-dom';
+import { NUTRIENT_ENDPOINT } from "../../usdaAPI";
+
 
 const Food = props => (
   <tr>
@@ -36,10 +38,18 @@ export default class FoodAvailable extends Component {
         this.state = {
           username: props.username,
           description: '',
-          nbbdno: 0,
+          fdcId: 0,
           servings: 0,
           date: new Date(),
-          users: [],
+          protein: 0,
+          carbs: 0,
+          fats: 0,
+          sodium: 0,
+          calcium: 0,
+          vitaminC: 0,
+          iron: 0,
+          // users: [],
+          pantry: true,
           data: makeData(),
           foods: []
         }
@@ -59,7 +69,7 @@ export default class FoodAvailable extends Component {
         //         console.log(error);
         //     })
 
-        axios.get('http://localhost:5000/foods/'+this.props.username)
+        axios.get('http://localhost:5000/foods/pantry/'+this.props.username)
         .then(response => {
           this.setState({ foods: response.data });
         })
@@ -71,13 +81,13 @@ export default class FoodAvailable extends Component {
       handleChangeValue = e => {
         console.log(e.target.value);
         var str = e.target.value;
-        var ndbnum = str.substr(0,str.indexOf(','));
+        var fdc = str.substr(0,str.indexOf(','));
         var desc = str.substr(str.indexOf(',')+1);
-        console.log(ndbnum);
+        console.log(fdc);
         console.log(desc);
         this.setState({
           description: desc,
-          ndbno: ndbnum
+          fdcId: fdc
         });
       }
 
@@ -121,19 +131,81 @@ export default class FoodAvailable extends Component {
 
       onSubmit(e) {
         e.preventDefault();
-        const food = {
-          username: this.state.username,
-          description: this.state.description,
-          servings: this.state.servings,
-          date: this.state.date,
-        };
 
-      console.log(food);
-      axios.post('http://localhost:5000/foods/add', food)
-        .then(res => {
-          console.log(res.data);
-          this.props.history.push('/create')
-        });
+        fetch(NUTRIENT_ENDPOINT(this.state.fdcId))
+          .then(res => res.json())
+          .then(listObj => {
+            console.log(listObj);
+            var nutList = [];
+            listObj.foodNutrients.forEach(nutr => {
+              // console.log(nutr.nutrient);
+              if (nutr.nutrient.id == 1003) {
+                this.setState({protein: nutr.amount});
+              } else if (nutr.nutrient.id == 1005) {
+                this.setState({carbs: nutr.amount});
+              } else if (nutr.nutrient.id == 1004) {
+                this.setState({fats: nutr.amount});
+              } else if (nutr.nutrient.id == 1093) {
+                this.setState({sodium: nutr.amount});
+              } else if (nutr.nutrient.id == 1087) {
+                this.setState({calcium: nutr.amount});
+              } else if (nutr.nutrient.id == 1162) {
+                this.setState({vitaminC: nutr.amount});
+              } else if (nutr.nutrient.id == 1089) {
+                this.setState({iron: nutr.amount});
+              }
+            })
+            // this.setState({
+            //   apiSearchList: listObj.foods
+            // })
+          })
+          .then( res => {
+            console.log("Query");
+            console.log(res)
+            const food = {
+              username: this.state.username,
+              description: this.state.description,
+              fdcId: this.state.fdcId,
+              servings: this.state.servings,
+              date: this.state.date,
+              protein: this.state.protein,
+              carbs: this.state.carbs,
+              fats: this.state.fats,
+              sodium: this.state.sodium,
+              calcium: this.state.calcium,
+              vitaminC: this.state.vitaminC,
+              iron: this.state.iron,
+              pantry: this.state.pantry
+            };
+    
+          console.log(food);
+          axios.post('http://localhost:5000/foods/add', food)
+            .then(res => {
+              console.log(res.data);
+              this.props.history.push('/create')
+            });
+          })
+          .catch(err =>
+            this.setState({
+              fetchApiSearchListErr: err.message
+            })
+          );
+        
+      //   const food = {
+      //     username: this.state.username,
+      //     description: this.state.description,
+      //     fdcId: this.state.fdcId,
+      //     servings: this.state.servings,
+      //     date: this.state.date,
+      //     pantry: this.state.pantry
+      //   };
+
+      // console.log(food);
+      // axios.post('http://localhost:5000/foods/add', food)
+      //   .then(res => {
+      //     console.log(res.data);
+      //     this.props.history.push('/create')
+      //   });
       // window.location = '/create';
       }
 
@@ -182,7 +254,7 @@ export default class FoodAvailable extends Component {
 
 
 
-        <h3>Create New Food Log</h3>
+        <h3>Add to Pantry</h3>
 
         <SearchBar value={this.state.description} onChangeValue={this.handleChangeValue}/>
         <form onSubmit={this.onSubmit}>
@@ -205,7 +277,7 @@ export default class FoodAvailable extends Component {
                 onChange={this.onChangeServings}
                 />
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label>Date: </label>
             <div>
               <DatePicker
@@ -213,7 +285,7 @@ export default class FoodAvailable extends Component {
                 onChange={this.onChangeDate}
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="form-group">
             <input type="submit" value="Create Food Log" className="btn btn-primary" />

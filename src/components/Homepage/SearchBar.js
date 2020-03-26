@@ -24,7 +24,7 @@ class SearchBar extends Component {
       .then(listObj => {
         console.log(listObj);
         this.setState({
-          apiSearchList: listObj.list.item,
+          apiSearchList: listObj.foods,
           apiSearchListIsLoaded: true
         })
 
@@ -51,7 +51,7 @@ class SearchBar extends Component {
           value: foodId,
         selectedFoods: [
           ...this.state.selectedFoods,
-          ...this.state.apiSearchList.filter(item => item.ndbno === foodId)
+          ...this.state.apiSearchList.filter(item => item.fdcId === foodId)
         ]
       });
       console.log(foodId);
@@ -116,8 +116,8 @@ class SearchBar extends Component {
             >
                 <option value="" />
                 {apiSearchList.map(foodEl => (
-                <option key={foodEl.ndbno} value={[foodEl.ndbno, foodEl.name]}>
-                    {foodEl.name}
+                <option key={foodEl.fdcId} value={[foodEl.fdcId, foodEl.description]}>
+                    {foodEl.description}
                 </option>
                 ))}
             </select>

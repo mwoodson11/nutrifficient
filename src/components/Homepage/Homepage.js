@@ -6,6 +6,7 @@ import FoodsList from "./foods-list.component";
 import EditFood from "./edit-food.component";
 import FoodAvailable from "./FoodAvailable";
 import CreateUser from "./create-user.component";
+import DeficiencyCalculator from "./DeficiencyCalculator.component";
 
 function Homepage(property){
     return(
@@ -18,13 +19,21 @@ function Homepage(property){
                         path='/foodslist'
                         render={(props) => <FoodsList {...props} username={property.username} />}
                     />
-                    <Route path="/edit/:id" component={EditFood} />
+                    {/* <Route path="/edit/:id" component={EditFood} /> */}
                     {/* <Route path="/create" component={FoodAvailable} /> */}
+                    <Route
+                        path='/edit/:id'
+                        render={(props) => <EditFood {...props} username={property.username} />}
+                    />
                     <Route
                         path='/create'
                         render={(props) => <FoodAvailable {...props} username={property.username} />}
                     />
                     {/* <Route path="/user" component={CreateUser} /> */}
+                    <Route
+                        path='/deficiency'
+                        render={(props) => <DeficiencyCalculator {...props} username={property.username} />}
+                    />
                     <Route
                         path='/user'
                         render={(props) => <CreateUser {...props} username={property.username} />}
