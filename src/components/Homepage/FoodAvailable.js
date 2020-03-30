@@ -51,7 +51,8 @@ export default class FoodAvailable extends Component {
           // users: [],
           pantry: true,
           data: makeData(),
-          foods: []
+          foods: [],
+          errors: []
         }
       }
 
@@ -92,7 +93,11 @@ export default class FoodAvailable extends Component {
       }
 
       handleDelete(id){
-        
+        axios.delete('http://localhost:5000/foods/'+id)
+            .then(res => console.log(res.data));
+        this.setState({
+            exercises: this.state.foods.filter(el => el._id !== id)
+        })
       }
 
       handleEdit(id){
@@ -131,6 +136,11 @@ export default class FoodAvailable extends Component {
 
       onSubmit(e) {
         e.preventDefault();
+        const errors = validateServings(this.state.servings);
+        if (errors.length != 0) {
+          this.setState({errors});
+          return;
+        }
 
         fetch(NUTRIENT_ENDPOINT(this.state.fdcId))
           .then(res => res.json())
@@ -207,6 +217,10 @@ export default class FoodAvailable extends Component {
       //     this.props.history.push('/create')
       //   });
       // window.location = '/create';
+
+      //Reload current page
+      
+
       }
 
   render() {
@@ -220,18 +234,21 @@ export default class FoodAvailable extends Component {
             {
               Header: "Food",
               //Cell:
-              accessor:"description"//this.state.foods.map(currentfood => {
+              accessor:"description",//this.state.foods.map(currentfood => {
                 //return this.props.food.description
               //})
+              width: 800
 
             },
             {
-              Header: "Amount",
+              Header: "Servings",
               // id: "lastName",
-              accessor: "servings"
+              accessor: "servings",
+              width: 150
             },
             {
               Header: "",
+              width:100,
               Cell: row => (
                 <div>
                     <button onClick={() => this.handleEdit(row.original)}>Edit</button>
@@ -253,11 +270,14 @@ export default class FoodAvailable extends Component {
 
 
 
-
+      
         <h3>Add to Pantry</h3>
 
         <SearchBar value={this.state.description} onChangeValue={this.handleChangeValue}/>
         <form onSubmit={this.onSubmit}>
+          {this.state.errors.map(error => (
+          <p key={error}>Error: {error}</p>
+          ))}
           <div className="form-group"> 
             <label>Description: </label>
             {/* <input  type="text"
@@ -296,4 +316,11 @@ export default class FoodAvailable extends Component {
   }
 }
 
+function validateServings(servings) {
+  const errors = [];
+  if (servings === 0 ) {
+    errors.push("Serving must be bigger than 0.");
+  }
+  return errors;
+}
 

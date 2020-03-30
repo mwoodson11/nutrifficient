@@ -4,6 +4,8 @@ import DatePicker from 'react-datepicker';
 import SearchBar from './SearchBar';
 import axios from 'axios';
 import { NUTRIENT_ENDPOINT } from "../../usdaAPI";
+import ReactTable from 'react-table-6';
+import 'react-table-6/react-table.css';
 
 
 const Food = props => (
@@ -82,6 +84,17 @@ export default class FoodsList extends Component {
             exercises: this.state.foods.filter(el => el._id !== id)
         })
     }
+
+
+    //delete not working
+    handleDelete(id) {
+      axios.delete('http://localhost:5000/foods/'+id)
+          .then(res => console.log(res.data));
+      this.setState({
+          exercises: this.state.foods.filter(el => el._id !== id)
+  })
+    }
+
 
     foodList() {
         return this.state.foods.map(currentfood => {
@@ -164,30 +177,81 @@ export default class FoodsList extends Component {
       }
 
   render() {
+    const data = this.state.foods;
     return (
       <div>
         <h3>Logged Food</h3>
-        <table className="table">
-            <thead className="thead-light">
-            <tr>
-                {/* <th>Username</th> */}
-                <th>Description</th>
-                <th>Servings</th>
-                <th>Protein (g)</th>
-                <th>Carbs (g)</th>
-                <th>Fats (g)</th>
-                <th>Sodium (mg)</th>
-                <th>Calcium (mg)</th>
-                <th>Vitamin C (mg)</th>
-                <th>Iron (mg)</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            { this.foodList() }
-            </tbody>
-        </table>
+        <ReactTable
+          data = {data}
+          columns = {[
+            {
+              Header: "Description",
+              accessor: "description",
+              width: 300
+            },
+            {
+              Header: "Servings",
+              accessor: "servings",
+              width: 75
+            },
+            {
+              Header:"Protein (g)",
+              accessor: "protein",
+              width: 75
+            }, 
+            {
+              Header:"Carbs (g)",
+              accessor:"carbs",
+              width: 75
+            },
+            {
+              Header: "Fats (g)",
+              accessor: "fats",
+              width: 75
+            },
+            {
+              Header: "Sodium (mg)",
+              accessor: "sodium",
+              width: 75
+            },
+            {
+              Header: "Calcium (mg)",
+              accessor: "calcium",
+              width: 75
+            },
+            {
+              Header: "Vitamin C (mg)",
+              accessor: "vitaminc",
+              width: 75
+            },
+            {
+              Header: "Iron (mg)",
+              accessor: "iron",
+              width: 75
+            },
+            {
+              Header: "Date",
+              accessor: "date",
+              width: 100
+            },
+            {
+              Header: "",
+              width: 100,
+              Cell: row => (
+                <div>
+                    <button onClick={() => this.handleDelete(row.original)}>Delete</button>
+                </div>
+              )
+            }
+
+          ]}
+          defaultPageSize = {20}
+          style = {{
+            height: "400px"
+          }}
+          className = '-striped -highlight'
+          />
+
 
 
         <h3>Create New Food Log</h3>

@@ -52,11 +52,26 @@ export default class CreateUser extends Component {
           weight: e.target.value
         });
       }
+
+      changeGenderNum(e) {
+        if (e.target.value == "male") {
+          this.setState({
+            genderNum: 0
+          });
+        } else {
+          this.setState({
+            genderNum: 1
+          });
+        }
+      }
+
       onChangeGender(e) {
         this.setState({
-          gender: e.target.value
+          gender: e.target.value,
         });
+        this.changeGenderNum(e);
       }
+
       
       onSubmit(e) {
         e.preventDefault();
@@ -67,7 +82,8 @@ export default class CreateUser extends Component {
           password: this.state.password,
           height: Number(this.state.height),
           weight: Number(this.state.weight),
-          gender: Number(this.state.gender)
+          genderNum: 0,
+          gender: 'male'
         };
         console.log(user);
         axios.post('http://localhost:5000/users/update/'+user.id, user)
@@ -98,14 +114,12 @@ export default class CreateUser extends Component {
                     onChange={this.onChangeWeight}
                     />
             </div>
-            <div className="form-group"> 
-                <label>Gender: </label>
-                <input  type="text"
-                    required
-                    className="form-control"
-                    value={this.state.gender}
-                    onChange={this.onChangeGender}
-                    />
+            <div className="form-group">
+              <label>Gender :  </label>
+                <select value = {this.state.gender} onChange = {this.onChangeGender}>
+                  <option name = "male">Male</option>
+                  <option name = "female">Female</option>
+                </select>
             </div>
             <div className="form-group">
                 <input type="submit" value="Submit Changes" className="btn btn-primary" />
