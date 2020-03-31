@@ -81,7 +81,7 @@ export default class FoodsList extends Component {
         axios.delete('http://localhost:5000/foods/'+id)
             .then(res => console.log(res.data));
         this.setState({
-            exercises: this.state.foods.filter(el => el._id !== id)
+            foods: this.state.foods.filter(el => el._id !== id)
         })
     }
 
@@ -177,12 +177,26 @@ export default class FoodsList extends Component {
       }
 
   render() {
-    const data = this.state.foods;
+    const datas = this.state.foods;
+    // console.log(datas);
+    // datas.forEach((ele) => {
+    //   if (ele.servings != 1) {
+    //     console.log(ele)
+    //     ele.protein *= ele.servings;
+    //     ele.carbs *= ele.servings;
+    //     ele.fats *= ele.servings;
+    //     ele.sodium *= ele.servings;
+    //     ele.calcium *= ele.servings;
+    //     ele.vitaminC *= ele.servings;
+    //     ele.iron *= ele.servings;
+    //   }
+    // })
+    // console.log(datas);
     return (
       <div>
         <h3>Logged Food</h3>
         <ReactTable
-          data = {data}
+          data = {datas}
           columns = {[
             {
               Header: "Description",
@@ -197,37 +211,72 @@ export default class FoodsList extends Component {
             {
               Header:"Protein (g)",
               accessor: "protein",
-              width: 75
+              width: 75,
+              Cell: row => (
+                <div>
+                    {row.original.protein * row.original.servings}
+                </div>
+              )
             }, 
             {
               Header:"Carbs (g)",
               accessor:"carbs",
-              width: 75
+              width: 75,
+              Cell: row => (
+                <div>
+                    {row.original.carbs * row.original.servings}
+                </div>
+              )
             },
             {
               Header: "Fats (g)",
               accessor: "fats",
-              width: 75
+              width: 75,
+              Cell: row => (
+                <div>
+                    {row.original.fats * row.original.servings}
+                </div>
+              )
             },
             {
               Header: "Sodium (mg)",
               accessor: "sodium",
-              width: 75
+              width: 75,
+              Cell: row => (
+                <div>
+                    {row.original.sodium * row.original.servings}
+                </div>
+              )
             },
             {
               Header: "Calcium (mg)",
               accessor: "calcium",
-              width: 75
+              width: 75,
+              Cell: row => (
+                <div>
+                    {row.original.calcium * row.original.servings}
+                </div>
+              )
             },
             {
               Header: "Vitamin C (mg)",
-              accessor: "vitaminc",
-              width: 75
+              accessor: "vitaminC",
+              width: 75,
+              Cell: row => (
+                <div>
+                    {row.original.vitaminC * row.original.servings}
+                </div>
+              )
             },
             {
               Header: "Iron (mg)",
               accessor: "iron",
-              width: 75
+              width: 75,
+              Cell: row => (
+                <div>
+                    {row.original.iron * row.original.servings}
+                </div>
+              )
             },
             {
               Header: "Date",
@@ -239,7 +288,7 @@ export default class FoodsList extends Component {
               width: 100,
               Cell: row => (
                 <div>
-                    <button onClick={() => this.handleDelete(row.original)}>Delete</button>
+                    <button onClick={() => this.handleDelete(row.original._id)}>Delete</button>
                 </div>
               )
             }

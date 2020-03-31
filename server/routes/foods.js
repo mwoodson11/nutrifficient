@@ -39,13 +39,13 @@ router.route('/add').post((req, res) => {
   const fdcId = Number(req.body.fdcId);
   const servings = Number(req.body.servings);
   const date = Date.parse(req.body.date);
-  const protein = Number(req.body.protein);
-  const carbs = Number(req.body.carbs);
-  const fats = Number(req.body.fats);
-  const sodium = Number(req.body.sodium);
-  const calcium = Number(req.body.calcium);
-  const vitaminC = Number(req.body.vitaminC);
-  const iron = Number(req.body.iron);
+  const protein = Math.round(Number(req.body.protein));
+  const carbs = Math.round(Number(req.body.carbs));
+  const fats = Math.round(Number(req.body.fats));
+  const sodium = Math.round(Number(req.body.sodium));
+  const calcium = Math.round(Number(req.body.calcium));
+  const vitaminC = Math.round(Number(req.body.vitaminC));
+  const iron = Math.round(Number(req.body.iron));
   const pantry = req.body.pantry;
 
   const newFood = new Food({
@@ -97,6 +97,31 @@ router.route('/update/:id').post((req, res) => {
       food.vitaminC = Number(req.body.vitaminC);
       food.iron = Number(req.body.iron);
       food.pantry = req.body.pantry;
+
+      food.save()
+        .then(() => res.json('Food updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/updateServ/:id').post((req, res) => {
+  Food.findById(req.params.id)
+    .then(food => {
+      // console.log(food);
+      food.username = food.username;
+      food.description = food.description;
+      food.fdcId = food.fdcId;
+      food.servings = Number(req.body.servings);
+      food.date = food.date;
+      food.protein = food.protein;
+      food.carbs = food.carbs;
+      food.fats = food.fats;
+      food.sodium = food.sodium;
+      food.calcium = food.calcium;
+      food.vitaminC = food.vitaminC;
+      food.iron = food.iron;
+      food.pantry = food.pantry;
 
       food.save()
         .then(() => res.json('Food updated!'))

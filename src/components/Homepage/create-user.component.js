@@ -17,7 +17,8 @@ export default class CreateUser extends Component {
           password: '',
           height: 0,
           weight: 0,
-          gender: 0
+          gender: 0,
+          genderId: ''
         };
       }
 
@@ -34,7 +35,12 @@ export default class CreateUser extends Component {
             gender: response.data[0].gender
 
           });
-          console.log(response.data[0].username);
+          console.log(response.data[0]);
+          if (this.state.gender == 1) {
+            this.setState({genderId: "male"});
+          } else if (this.state.gender == 2) {
+            this.setState({genderId: "female"});
+          }
 
         })
         .catch((error) => {
@@ -53,40 +59,39 @@ export default class CreateUser extends Component {
         });
       }
 
-      changeGenderNum(e) {
+      onChangeGender(e) {
         if (e.target.value == "male") {
           this.setState({
-            genderNum: 0
+            genderId: "male",
+            gender: 1
+          });
+        } else if (e.target.value == "female") {
+          this.setState({
+            genderId: "female",
+            gender: 2
           });
         } else {
           this.setState({
-            genderNum: 1
+            genderId: "",
+            gender: 0,
           });
         }
-      }
-
-      onChangeGender(e) {
-        this.setState({
-          gender: e.target.value,
-        });
-        this.changeGenderNum(e);
       }
 
       
       onSubmit(e) {
         e.preventDefault();
+        const userid = this.state.id;
         const user = {
-          id: this.state.id,
           username: this.state.username,
           email: this.state.email,
           password: this.state.password,
           height: Number(this.state.height),
           weight: Number(this.state.weight),
-          genderNum: 0,
-          gender: 'male'
+          gender: Number(this.state.gender)
         };
         console.log(user);
-        axios.post('http://localhost:5000/users/update/'+user.id, user)
+        axios.post('http://localhost:5000/users/update/'+userid, user)
         .then(res => console.log(res.data));
       
       }
@@ -98,7 +103,7 @@ export default class CreateUser extends Component {
             <form onSubmit={this.onSubmit}>
             <div className="form-group"> 
                 <label>Height: </label>
-                <input  type="text"
+                <input  type="number"
                     required
                     className="form-control"
                     value={this.state.height}
@@ -107,7 +112,7 @@ export default class CreateUser extends Component {
             </div>
             <div className="form-group"> 
                 <label>Weight: </label>
-                <input  type="text"
+                <input  type="number"
                     required
                     className="form-control"
                     value={this.state.weight}
@@ -115,10 +120,11 @@ export default class CreateUser extends Component {
                     />
             </div>
             <div className="form-group">
-              <label>Gender :  </label>
-                <select value = {this.state.gender} onChange = {this.onChangeGender}>
-                  <option name = "male">Male</option>
-                  <option name = "female">Female</option>
+              <label>Gender:  </label><br></br>
+                <select value = {this.state.genderId} onChange = {this.onChangeGender}>
+                  <option value = ""></option>
+                  <option value = "male">Male</option>
+                  <option value = "female">Female</option>
                 </select>
             </div>
             <div className="form-group">

@@ -33,10 +33,13 @@ export default class FoodAvailable extends Component {
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeServings = this.onChangeServings.bind(this);
         // this.onChangeDate = this.onChangeDate.bind(this);
+        this.handlePopupChange = this.handlePopupChange.bind(this);
+        this.handlePopupSubmit = this.handlePopupSubmit.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.deleteFood = this.deleteFood.bind(this);
 
         this.state = {
+          id: '',
           username: props.username,
           description: 'food name',
           fdcId: 0,
@@ -90,15 +93,35 @@ export default class FoodAvailable extends Component {
       }
 
       handlePopupSubmit(e) {
-        this.setState({
-          popupInput: e.target.value
-        });
+        // console.log(e)
+        // this.setState({
+        //   popupInput: e.target.value
+        // });
         {/*Still need to query and edit the value */}
-        this.popupClose();
+        console.log("value");
+        
+        console.log(e.target);
+        console.log(this.state.popupInput)
+        const food = {
+          servings: this.state.popupInput
+        }
+        axios.post('http://localhost:5000/foods/updateServ/'+this.state.id, food)
+            .then(res => {
+              console.log(res.data);
+            })
+            .then(() => {
+              this.popupClose();
+            })
       }
 
-      popupOpen() {
-        this.setState({popup: true});
+      popupOpen(e, food) {
+        console.log(food);
+        this.setState({
+          popup: true,
+          description: food.description,
+          id: food._id,
+          popupInput: food.servings
+        });
       }
 
       popupClose() {
@@ -113,8 +136,6 @@ export default class FoodAvailable extends Component {
         var str = e.target.value;
         var fdc = str.substr(0,str.indexOf(','));
         var desc = str.substr(str.indexOf(',')+1);
-        console.log(fdc);
-        console.log(desc);
         this.setState({
           description: desc,
           fdcId: fdc
@@ -125,11 +146,12 @@ export default class FoodAvailable extends Component {
         axios.delete('http://localhost:5000/foods/'+id)
             .then(res => console.log(res.data));
         this.setState({
-            exercises: this.state.foods.filter(el => el._id !== id)
+            foods: this.state.foods.filter(el => el._id !== id)
         })
       }
 
       handleEdit(id){
+        console.log(id);
 
       }
 
@@ -198,9 +220,7 @@ export default class FoodAvailable extends Component {
             //   apiSearchList: listObj.foods
             // })
           })
-          .then( res => {
-            console.log("Query");
-            console.log(res)
+          .then( () => {
             const food = {
               username: this.state.username,
               description: this.state.description,
@@ -266,7 +286,7 @@ export default class FoodAvailable extends Component {
               accessor:"description",//this.state.foods.map(currentfood => {
                 //return this.props.food.description
               //})
-              width: 800
+              width: 600
 
             },
             {
@@ -278,11 +298,12 @@ export default class FoodAvailable extends Component {
             {
               Header: "",
               width:100,
+              accessor: "_id",
               Cell: row => (
                 <div>
-                    <button onClick={e => this.popupOpen(e)}>Edit</button>
-                    {/*<button onClick={() => this.handleEdit(row.original)}>Edit</button> */}
-                    <button onClick={() => this.handleDelete(row.original)}>Delete</button>
+                    <button onClick={e => this.popupOpen(e, row.original)}>Edit</button>
+                    {/* <button onClick={() => this.handleEdit(row.original)}>Edit</button> */}
+                    <button onClick={() => this.handleDelete(row.original._id)}>Delete</button>
                 </div>
               )
             }
@@ -300,12 +321,12 @@ export default class FoodAvailable extends Component {
               type = "text"
               value = {this.state.popupInput}
               name = "popupInput"
-              onChange = {e => this.handlePopupChange(e)}
+              onChange = {this.handlePopupChange}
               className = "form-control"
             />
             </div>
             <div className = "form-group">
-            <button onClick = {e => this.handlePopupSubmit(e)} type = "button">
+            <button onClick = {this.handlePopupSubmit} type = "button">
             Save
             </button>
             </div>
