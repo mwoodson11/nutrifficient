@@ -8,6 +8,7 @@ import 'react-table-6/react-table.css';
 import {makeData} from "./Utils";
 import {Link, withRouter} from 'react-router-dom';
 import { NUTRIENT_ENDPOINT } from "../../usdaAPI";
+import Popup from './Popup';
 
 
 const Food = props => (
@@ -37,7 +38,7 @@ export default class FoodAvailable extends Component {
 
         this.state = {
           username: props.username,
-          description: '',
+          description: 'food name',
           fdcId: 0,
           servings: 0,
           date: new Date(),
@@ -52,7 +53,10 @@ export default class FoodAvailable extends Component {
           pantry: true,
           data: makeData(),
           foods: [],
-          errors: []
+          errors: [],
+          popup: false,
+          popupInput : 0, //possible to have this equal the current food serving?
+
         }
       }
 
@@ -76,6 +80,31 @@ export default class FoodAvailable extends Component {
         })
         .catch((error) => {
             console.log(error);
+        })
+      }
+
+      handlePopupChange(e) {
+        this.setState({
+          popupInput: e.target.value
+        });
+      }
+
+      handlePopupSubmit(e) {
+        this.setState({
+          popupInput: e.target.value
+        });
+        {/*Still need to query and edit the value */}
+        this.popupClose();
+      }
+
+      popupOpen() {
+        this.setState({popup: true});
+      }
+
+      popupClose() {
+        this.setState({
+          popupInput: 0,
+          popup: false
         })
       }
 
@@ -251,7 +280,8 @@ export default class FoodAvailable extends Component {
               width:100,
               Cell: row => (
                 <div>
-                    <button onClick={() => this.handleEdit(row.original)}>Edit</button>
+                    <button onClick={e => this.popupOpen(e)}>Edit</button>
+                    {/*<button onClick={() => this.handleEdit(row.original)}>Edit</button> */}
                     <button onClick={() => this.handleDelete(row.original)}>Delete</button>
                 </div>
               )
@@ -263,6 +293,23 @@ export default class FoodAvailable extends Component {
           }}
           className='-striped -highlight'
           />
+          <Popup show = {this.state.popup} handleClose = {e => this.popupClose(e)}>
+            <div className = "form-group">
+            <label>Edit Servings for </label><i> {this.state.description}</i>
+            <input 
+              type = "text"
+              value = {this.state.popupInput}
+              name = "popupInput"
+              onChange = {e => this.handlePopupChange(e)}
+              className = "form-control"
+            />
+            </div>
+            <div className = "form-group">
+            <button onClick = {e => this.handlePopupSubmit(e)} type = "button">
+            Save
+            </button>
+            </div>
+            </Popup>
 
 
 

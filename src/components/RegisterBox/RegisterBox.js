@@ -144,7 +144,7 @@ function validate(username, email, password, password2) {
   if (email.indexOf(".") === -1) {
     errors.push("Email should contain at least one dot.");
   }
-  if (password != password2) {
+  if (password !== password2) {
     errors.push("Passwords must be equal");
   }
   return errors;
