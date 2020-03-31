@@ -7,6 +7,8 @@ import EditFood from "./edit-food.component";
 import FoodAvailable from "./FoodAvailable";
 import CreateUser from "./create-user.component";
 import DeficiencyCalculator from "./DeficiencyCalculator.component";
+import NutrientTracker from "./NutrientTracker";
+import Suggestions from "./Suggestions";
 
 function Homepage(property){
     return(
@@ -38,6 +40,14 @@ function Homepage(property){
                         path='/user'
                         render={(props) => <CreateUser {...props} username={property.username} />}
                     />
+                    <Route 
+                        path = '/nutrienttracker'
+                        render = {(props) => <NutrientTracker {...props} username = {property.username} />}
+                        />
+                    <Route 
+                        path = '/suggestion'
+                        render = {(props) => <Suggestions {...props} username = {property.username} />}
+                        />
                 </Switch>
             </Router>
         </div>
