@@ -108,6 +108,11 @@ export default class FoodAvailable extends Component {
         axios.post('http://localhost:5000/foods/updateServ/'+this.state.id, food)
             .then(res => {
               console.log(res.data);
+              axios.get('http://localhost:5000/foods/log/'+this.state.username)
+                .then(response => {
+                  this.setState({ foods: response.data });
+                  console.log("Updated food.");
+                })
             })
             .then(() => {
               this.popupClose();
@@ -241,7 +246,11 @@ export default class FoodAvailable extends Component {
           axios.post('http://localhost:5000/foods/add', food)
             .then(res => {
               console.log(res.data);
-              this.props.history.push('/create')
+              axios.get('http://localhost:5000/foods/log/'+this.state.username)
+                .then(response => {
+                  this.setState({ foods: response.data });
+                  console.log("Updated food.");
+                })
             });
           })
           .catch(err =>

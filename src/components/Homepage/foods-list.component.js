@@ -34,7 +34,7 @@ export default class FoodsList extends Component {
         this.onChangeServings = this.onChangeServings.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.deleteFood = this.deleteFood.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.state = {
           username: props.username,
           description: '',
@@ -77,21 +77,13 @@ export default class FoodsList extends Component {
         });
       }
 
-    deleteFood(id) {
-        axios.delete('http://localhost:5000/foods/'+id)
-            .then(res => console.log(res.data));
-        this.setState({
-            foods: this.state.foods.filter(el => el._id !== id)
-        })
-    }
-
 
     //delete not working
     handleDelete(id) {
       axios.delete('http://localhost:5000/foods/'+id)
           .then(res => console.log(res.data));
       this.setState({
-          exercises: this.state.foods.filter(el => el._id !== id)
+          foods: this.state.foods.filter(el => el._id !== id)
   })
     }
 
@@ -147,10 +139,7 @@ export default class FoodsList extends Component {
             //   apiSearchList: listObj.foods
             // })
           })
-          .then( res => {
-            console.log("Query");
-            console.log(res)
-
+          .then( () => {
             const food = {
               username: this.state.username,
               description: this.state.description,
@@ -166,14 +155,23 @@ export default class FoodsList extends Component {
               iron: this.state.iron,
               pantry: this.state.pantry
             };
-
-          console.log(food);
-          axios.post('http://localhost:5000/foods/add', food)
-            .then(res => {
-              console.log(res.data);
-              this.props.history.push('/foodslist')
-            });
-          });
+            console.log(food);
+            axios.post('http://localhost:5000/foods/add', food)
+              .then(res => {
+                console.log(res.data);
+                // var temp = this.state.foods;
+                // temp.push(food);
+                axios.get('http://localhost:5000/foods/log/'+this.state.username)
+                  .then(response => {
+                    this.setState({ foods: response.data });
+                    console.log("Updated food.");
+                  })
+              })
+          })
+          
+          .catch((error) => {
+            console.log(error);
+        });
       }
 
   render() {
@@ -214,7 +212,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.protein * row.original.servings}
+                    {row.original.protein * row.original.servings} g
                 </div>
               )
             }, 
@@ -224,7 +222,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.carbs * row.original.servings}
+                    {row.original.carbs * row.original.servings} g
                 </div>
               )
             },
@@ -234,7 +232,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.fats * row.original.servings}
+                    {row.original.fats * row.original.servings} g
                 </div>
               )
             },
@@ -244,7 +242,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.sodium * row.original.servings}
+                    {row.original.sodium * row.original.servings} mg
                 </div>
               )
             },
@@ -254,7 +252,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.calcium * row.original.servings}
+                    {row.original.calcium * row.original.servings} mg
                 </div>
               )
             },
@@ -264,7 +262,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.vitaminC * row.original.servings}
+                    {row.original.vitaminC * row.original.servings} mg
                 </div>
               )
             },
@@ -274,7 +272,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.iron * row.original.servings}
+                    {row.original.iron * row.original.servings} mg
                 </div>
               )
             },
