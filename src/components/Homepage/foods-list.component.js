@@ -206,7 +206,7 @@ export default class FoodsList extends Component {
               width: 75
             },
             {
-              Header:"Protein (g)",
+              Header:"Protein",
               accessor: "protein",
               width: 75,
               Cell: row => (
@@ -216,7 +216,7 @@ export default class FoodsList extends Component {
               )
             }, 
             {
-              Header:"Carbs (g)",
+              Header:"Carbs",
               accessor:"carbs",
               width: 75,
               Cell: row => (
@@ -226,7 +226,7 @@ export default class FoodsList extends Component {
               )
             },
             {
-              Header: "Fats (g)",
+              Header: "Fats",
               accessor: "fats",
               width: 75,
               Cell: row => (
@@ -236,7 +236,7 @@ export default class FoodsList extends Component {
               )
             },
             {
-              Header: "Sodium (mg)",
+              Header: "Sodium",
               accessor: "sodium",
               width: 75,
               Cell: row => (
@@ -246,7 +246,7 @@ export default class FoodsList extends Component {
               )
             },
             {
-              Header: "Calcium (mg)",
+              Header: "Calcium",
               accessor: "calcium",
               width: 75,
               Cell: row => (
@@ -256,7 +256,7 @@ export default class FoodsList extends Component {
               )
             },
             {
-              Header: "Vitamin C (mg)",
+              Header: "Vitamin C",
               accessor: "vitaminC",
               width: 75,
               Cell: row => (
@@ -266,7 +266,7 @@ export default class FoodsList extends Component {
               )
             },
             {
-              Header: "Iron (mg)",
+              Header: "Iron",
               accessor: "iron",
               width: 75,
               Cell: row => (
