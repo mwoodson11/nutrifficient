@@ -49,6 +49,10 @@ const calcRatio = (loggedCals, totalCals) => {
   }
 }
 
+const valSort = (a, b) => {
+  return b.value - a.value;
+}
+
 const formatedFoodQuery = query => encodeURI(query.trim().toLowerCase());
 
 const kCalSum = arr => arr.reduce((acc, curVal) => acc + +curVal.kcal, 0);
@@ -61,4 +65,4 @@ const handleMissingValue = field => {
   }
 };
 
-export { formatedFoodQuery, kCalSum, handleMissingValue, calCalc, calcRatio };
+export { formatedFoodQuery, kCalSum, handleMissingValue, calCalc, calcRatio, valSort };

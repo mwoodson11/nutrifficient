@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ReactTable from 'react-table-6';
 import "./NutrientTracker.css"
+import { valSort } from './Utils';
 
 export default class Suggestions extends Component {
     constructor(props) {
@@ -12,10 +13,68 @@ export default class Suggestions extends Component {
             proteinlist: ["here", "hey"],
             carbslist: [],
             fatslist: [],
-            sodiumlist: [],
+            vitClist: [],
             calciumlist: [],
-            ironlist: []
-        }
+            ironlist: [],
+            foods: []
+        };
+
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:5000/foods/pantry/'+this.props.username)
+         .then(response => {
+            var proList = [];
+            var carList = [];
+            var fatList = [];
+            var vitList = [];
+            var calList = [];
+            var iroList = [];
+
+            response.data.forEach(food => {
+                if (food.protein > 0) {
+                    proList.push({description: food.description, value: food.protein});
+                }
+                if (food.carbs > 0) {
+                    carList.push({description: food.description, value: food.carbs});
+                }
+                if (food.fats > 0) {
+                    fatList.push({description: food.description, value: food.fats});
+                }
+                if (food.sodium > 0) {
+                    vitList.push({description: food.description, value: food.vitaminC});
+                }
+                if (food.calcium > 0) {
+                    calList.push({description: food.description, value: food.calcium});
+                }
+                if (food.iron > 0) {
+                    iroList.push({description: food.description, value: food.iron});
+                }
+            });
+
+            proList.sort(valSort);
+            carList.sort(valSort);
+            fatList.sort(valSort);
+            vitList.sort(valSort);
+            calList.sort(valSort);
+            iroList.sort(valSort);
+            // proList.sort(valSort);
+
+            this.setState({ 
+                foods: response.data,
+                proteinlist: proList,
+                carbslist: carList,
+                fatslist: fatList,
+                vitClist: vitList,
+                calciumlist: calList,
+                ironlist: iroList
+
+
+            });
+         })
+         .catch((error) => {
+            console.log(error);
+         })
     }
 
     render() {
@@ -30,10 +89,17 @@ export default class Suggestions extends Component {
                     data = {proteindata}
                     columns = {[
                     {
-                        accessor: "foodname"
+                        Header: "Name",
+                        accessor: "description"
                     },
-                    {
-                        accessor: "foodproteinamount"
+                    { 
+                        Header: "Amount",
+                        accessor: "value",
+                        Cell: row => (
+                            <div>
+                                {row.original.value} g
+                            </div>
+                          )
                     }
                 ]}
                 defaultPageSize = {20}
@@ -46,14 +112,21 @@ export default class Suggestions extends Component {
             <div className = "vit">
                 <h3>Carbs</h3>
                 <ReactTable 
-                    data = {this.state.proteinlist}
+                    data = {this.state.carbslist}
                     columns = {[
-                    {
-                        accessor: "foodname"
-                    },
-                    {
-                        accessor: "foodCarbAmount"
-                    }
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} g
+                                </div>
+                              )
+                        }
                 ]}
                 defaultPageSize = {20}
                 style = {{
@@ -65,14 +138,21 @@ export default class Suggestions extends Component {
             <div className = "vit">
                 <h3>Fats</h3>
                 <ReactTable 
-                    data = {this.state.proteinlist}
+                    data = {this.state.fatslist}
                     columns = {[
-                    {
-                        accessor: "foodname"
-                    },
-                    {
-                        accessor: "foodFatAmount"
-                    }
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} g
+                                </div>
+                              )
+                        }
                 ]}
                 defaultPageSize = {20}
                 style = {{
@@ -84,16 +164,23 @@ export default class Suggestions extends Component {
             </div>
             <div className = "rowC">
             <div className = "vit">
-                <h3>Sodium</h3>
+                <h3>Vitamin C</h3>
                 <ReactTable 
-                    data = {proteindata}
+                    data = {this.state.vitClist}
                     columns = {[
-                    {
-                        accessor: "foodname"
-                    },
-                    {
-                        accessor: "foodSodiumAmount"
-                    }
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} mg
+                                </div>
+                              )
+                        }
                 ]}
                 defaultPageSize = {20}
                 style = {{
@@ -105,14 +192,21 @@ export default class Suggestions extends Component {
             <div className = "vit">
                 <h3>Calcium</h3>
                 <ReactTable 
-                    data = {this.state.proteinlist}
+                    data = {this.state.calciumlist}
                     columns = {[
-                    {
-                        accessor: "foodname"
-                    },
-                    {
-                        accessor: "foodCalciumAmount"
-                    }
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} mg
+                                </div>
+                              )
+                        }
                 ]}
                 defaultPageSize = {20}
                 style = {{
@@ -124,14 +218,21 @@ export default class Suggestions extends Component {
             <div className = "vit">
                 <h3>Iron</h3>
                 <ReactTable 
-                    data = {this.state.proteinlist}
+                    data = {this.state.ironlist}
                     columns = {[
-                    {
-                        accessor: "foodname"
-                    },
-                    {
-                        accessor: "foodIronAmount"
-                    }
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} mg
+                                </div>
+                              )
+                        }
                 ]}
                 defaultPageSize = {20}
                 style = {{
