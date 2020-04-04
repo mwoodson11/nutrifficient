@@ -13,7 +13,7 @@ export default class Navbar extends Component {
           <Link to="/foodslist" className="nav-link">Food Log</Link>
           </li>
           <li className = "navbar-item">
-            <Link to = "/nutrienttracker" className = "nav-link"> Nurtient Tracker </Link>
+            <Link to = "/nutrienttracker" className = "nav-link"> Nutrient Tracker </Link>
           </li>
           <li className="navbar-item">
           <Link to="/create" className="nav-link">Food Available</Link>

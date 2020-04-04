@@ -36,7 +36,18 @@ const userSchema = new Schema({
     type: Number,
     required: false,
     unique: false
+  },
+  age: {
+    type: Number,
+    required: false,
+    unique: false
+  },
+  activity: {
+    type: Number,
+    required: false,
+    unique: false
   }
+
   
 }, {
   timestamps: true,

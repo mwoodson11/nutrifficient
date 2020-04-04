@@ -155,6 +155,16 @@ export default class FoodAvailable extends Component {
         })
       }
 
+      handleMove(id){
+        axios.post('http://localhost:5000/foods/addtolog/'+id)
+            .then(res => {
+              console.log(res.data);
+              this.setState({
+                foods: this.state.foods.filter(el => el._id !== id)
+              });
+            });
+      }
+
       handleEdit(id){
         console.log(id);
 
@@ -306,13 +316,14 @@ export default class FoodAvailable extends Component {
             },
             {
               Header: "",
-              width:100,
+              width:200,
               accessor: "_id",
               Cell: row => (
                 <div>
                     <button onClick={e => this.popupOpen(e, row.original)}>Edit</button>
                     {/* <button onClick={() => this.handleEdit(row.original)}>Edit</button> */}
                     <button onClick={() => this.handleDelete(row.original._id)}>Delete</button>
+                    <button onClick={() => this.handleMove(row.original._id)}>Log Meal</button>
                 </div>
               )
             }

@@ -77,8 +77,6 @@ export default class FoodsList extends Component {
         });
       }
 
-
-    //delete not working
     handleDelete(id) {
       axios.delete('http://localhost:5000/foods/'+id)
           .then(res => console.log(res.data));
@@ -140,6 +138,7 @@ export default class FoodsList extends Component {
             // })
           })
           .then( () => {
+            
             const food = {
               username: this.state.username,
               description: this.state.description,
@@ -279,7 +278,12 @@ export default class FoodsList extends Component {
             {
               Header: "Date",
               accessor: "date",
-              width: 100
+              width: 100,
+              Cell: row => (
+                <div>
+                  {row.original.date.substring(0,10)}
+                </div>
+              )
             },
             {
               Header: "",

@@ -31,6 +31,8 @@ router.route('/add').post((req, res) => {
   const height = 0;
   const weight = 0;
   const gender = 0;
+  const age = 0;
+  const activity = 0;
   
 
   const newUser = new User({
@@ -39,7 +41,9 @@ router.route('/add').post((req, res) => {
     password,
     height,
     weight,
-    gender
+    gender,
+    age,
+    activity
   });
 
   newUser.save()
@@ -56,6 +60,8 @@ router.route('/update/:id').post((req, res) => {
       user.height = Number(req.body.height);
       user.weight = Number(req.body.weight);
       user.gender = Number(req.body.gender);
+      user.age = Number(req.body.age);
+      user.activity = Number(req.body.activity);
 
       user.save()
         .then(() => res.json('User updated!'))

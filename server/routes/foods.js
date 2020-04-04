@@ -33,6 +33,31 @@ router.route('/pantry/:username').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/addtolog/:id').post((req, res) => {
+  Food.findById(req.params.id)
+    .then(food => {
+      // console.log(food);
+      food.username = food.username;
+      food.description = food.description;
+      food.fdcId = food.fdcId;
+      food.servings = food.servings;
+      food.date = new Date();
+      food.protein = food.protein;
+      food.carbs = food.carbs;
+      food.fats = food.fats;
+      food.sodium = food.sodium;
+      food.calcium = food.calcium;
+      food.vitaminC = food.vitaminC;
+      food.iron = food.iron;
+      food.pantry = false;
+
+      food.save()
+        .then(() => res.json('Food added to log!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
   const username = req.body.username;
   const description = req.body.description;

@@ -9,6 +9,8 @@ export default class CreateUser extends Component {
         this.onChangeHeight = this.onChangeHeight.bind(this);
         this.onChangeWeight = this.onChangeWeight.bind(this);
         this.onChangeGender = this.onChangeGender.bind(this);
+        this.onChangeAge = this.onChangeAge.bind(this);
+        this.onChangeActivity = this.onChangeActivity.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
           id: '',
@@ -17,8 +19,11 @@ export default class CreateUser extends Component {
           password: '',
           height: 0,
           weight: 0,
+          age: 0,
           gender: 0,
-          genderId: ''
+          genderId: '',
+          activity: 1.1,
+          activityId: '',
         };
       }
 
@@ -32,7 +37,9 @@ export default class CreateUser extends Component {
             password: response.data[0].password,
             height: response.data[0].height,
             weight: response.data[0].weight,
-            gender: response.data[0].gender
+            gender: response.data[0].gender,
+            age: response.data[0].age,
+            activity: response.data[0].activity
 
           });
           console.log(response.data[0]);
@@ -40,6 +47,17 @@ export default class CreateUser extends Component {
             this.setState({genderId: "male"});
           } else if (this.state.gender == 2) {
             this.setState({genderId: "female"});
+          }
+          if (this.state.activity == 1.25) {
+            this.setState({activityId: "Lightly Active"});
+          } else if (this.state.activity == 1.35) {
+            this.setState({activityId: "Moderately Active"});
+          } else if (this.state.activity == 1.5) {
+            this.setState({activityId: "Very Active"});
+          } else if (this.state.activity == 1.7) {
+            this.setState({activityId: "Extremely Active"});
+          } else {
+            this.setState({activityId: "Sedentary"})
           }
 
         })
@@ -78,6 +96,41 @@ export default class CreateUser extends Component {
         }
       }
 
+      onChangeActivity(e) {
+        if (e.target.value == "Sedentary") {
+          this.setState({
+            activityId: "Sedentary",
+            activity: 1.1
+          });
+        } else if (e.target.value == "Lightly Active") {
+          this.setState({
+            activityId: "Lightly Active",
+            activity: 1.25
+          });
+        } else if (e.target.value == "Moderately Active") {
+          this.setState({
+            activityId: "Moderately Active",
+            activity: 1.35
+          });
+        } else if (e.target.value == "Very Active") {
+            this.setState({
+              activityId: "Very Active",
+              activity: 1.5
+            });
+        } else {
+            this.setState({
+              activityId: "Extremely Active",
+              activity: 1.7
+            });
+        }
+      }
+
+      onChangeAge(e) {
+        this.setState({
+          age: e.target.value
+        });
+      }
+
       
       onSubmit(e) {
         e.preventDefault();
@@ -88,7 +141,9 @@ export default class CreateUser extends Component {
           password: this.state.password,
           height: Number(this.state.height),
           weight: Number(this.state.weight),
-          gender: Number(this.state.gender)
+          gender: Number(this.state.gender),
+          age: Number(this.state.age),
+          activity: Number(this.state.activity)
         };
         console.log(user);
         axios.post('http://localhost:5000/users/update/'+userid, user)
@@ -119,12 +174,31 @@ export default class CreateUser extends Component {
                     onChange={this.onChangeWeight}
                     />
             </div>
+            <div className="form-group"> 
+                <label>Age: </label>
+                <input  type="number"
+                    required
+                    className="form-control"
+                    value={this.state.age}
+                    onChange={this.onChangeAge}
+                    />
+            </div>
             <div className="form-group">
               <label>Gender:  </label><br></br>
                 <select value = {this.state.genderId} onChange = {this.onChangeGender}>
                   <option value = ""></option>
                   <option value = "male">Male</option>
                   <option value = "female">Female</option>
+                </select>
+            </div>
+            <div className="form-group">
+              <label>Activity Level:  </label><br></br>
+                <select value = {this.state.activityId} onChange = {this.onChangeActivity}>
+                  <option value = "Sedentary">Sedentary</option>
+                  <option value = "Lightly Active">Lightly Active</option>
+                  <option value = "Moderately Active">Moderately Active</option>
+                  <option value = "Very Active">Very Active</option>
+                  <option value = "Extremely Active">Extremely Active</option>
                 </select>
             </div>
             <div className="form-group">
