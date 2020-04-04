@@ -155,4 +155,77 @@ router.route('/updateServ/:id').post((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/deficiency/:username').get((req, res) => {
+  // var defReport = {};
+  var sendReport = {};
+  var dayReport = {};
+  dayReport["days"] = [];
+  dayReport["protein"] = 0;
+  dayReport["carbs"] = 0;
+  dayReport["fats"] = 0;
+  dayReport["vitaminC"] = 0;
+  dayReport["iron"] = 0;
+  dayReport["calcium"] = 0;
+  dayReport["sodium"] = 0;
+  // console.log(dayReport);
+  Food.find({
+    'username': req.params.username,
+    'pantry': false
+  })
+    .then(foods => {
+      // console.log(foods)
+      var dateID = '';
+      for (var i = 0, len = foods.length; i < len; i++) {
+        dateID = foods[i].date.toISOString().substring(0,10);
+        if (!dayReport["days"].includes(dateID)) {
+          dayReport["days"].push(dateID);
+        }
+        dayReport["protein"] += foods[i].protein;
+        dayReport["carbs"] += foods[i].carbs;
+        dayReport["fats"] += foods[i].fats;
+        dayReport["vitaminC"] += foods[i].vitaminC;
+        dayReport["iron"] += foods[i].iron;
+        dayReport["calcium"] += foods[i].calcium;
+        dayReport["sodium"] += foods[i].sodium;
+        // console.log(dayReport);
+      }
+
+      var days = dayReport["days"].length;
+
+      sendReport["protein"] = dayReport["protein"] / days;
+      sendReport["carbs"] = dayReport["carbs"] / days;
+      sendReport["fats"] = dayReport["fats"] / days;
+      sendReport["vitaminC"] = dayReport["vitaminC"] / days;
+      sendReport["iron"] = dayReport["iron"] / days;
+      sendReport["calcium"] = dayReport["calcium"] / days;
+      sendReport["sodium"] = dayReport["sodium"] / days;
+      console.log(sendReport);
+
+      // can be used for purposes later to only look at more recent days instead of all days
+      //   if(!defReport.hasOwnProperty(dateID)) {
+      //     var dayReport = {};
+      //     dayReport["protein"] = 0;
+      //     dayReport["carbs"] = 0;
+      //     dayReport["fats"] = 0;
+      //     dayReport["vitaminC"] = 0;
+      //     dayReport["iron"] = 0;
+      //     dayReport["calcium"] = 0;
+      //     dayReport["sodium"] = 0;
+
+      //     defReport[dateID] = dayReport;
+      //   }
+      //   defReport[dateID]["protein"] += foods[i]["protein"];
+      //   defReport[dateID]["carbs"] += foods[i]["carbs"];
+      //   defReport[dateID]["fats"] += foods[i]["fats"];
+      //   defReport[dateID]["vitaminC"] += foods[i]["vitaminC"];
+      //   defReport[dateID]["iron"] += foods[i]["iron"];
+      //   defReport[dateID]["calcium"] += foods[i]["calcium"];
+      //   defReport[dateID]["sodium"] += foods[i]["sodium"];
+      // }
+
+      res.json(sendReport);
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;

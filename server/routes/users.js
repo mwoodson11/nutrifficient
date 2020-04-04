@@ -24,6 +24,64 @@ router.route('/:username').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/deficiency/:username').get((req, res) => {
+  User.find({
+    'username': req.params.username,
+  })
+    .then(users => {
+      var user = users[0];
+
+      var sendReport = {};
+      var fatCal = 0;
+      var carbCal = 0;
+      var proCal = 0;
+      var totCal = 0;
+
+      var PercentCarbs = 0.4;
+      var PercentFats = 0.3;
+      var PercentPro = 0.3;
+      var FatPerGram = 9;
+      var CarbProPerGram = 4;
+
+      var RecommendedVitaminC = 90;
+      var RecommendedIron = 18;
+      var RecommendedCalcium = 1300;
+      var RecommendedSodium = 2300;
+      // console.log(user);
+
+
+      if (user.gender == 1) {
+        totCal = 66 + (6.23 * user.weight) + (12.7 * user.height) - (6.8 * user.age);
+      } else {
+        totCal = 655 + (4.35 * user.weight) + (4.7 * user.height) - (4.7 * user.age);
+      }
+      // console.log(totCal);
+      
+
+      totCal *= user.activity;
+
+      fatCal = totCal * PercentFats / FatPerGram;
+      proCal = totCal * PercentPro / CarbProPerGram;
+      carbCal = totCal * PercentCarbs / CarbProPerGram;
+
+      // console.log("Test 3");
+
+      sendReport["fats"] = fatCal;
+      sendReport["protein"] = proCal;
+      sendReport["carbs"] = carbCal;
+      sendReport["vitaminC"] = RecommendedVitaminC;
+      sendReport["iron"] = RecommendedIron;
+      sendReport["calcium"] = RecommendedCalcium;
+      sendReport["sodium"] = RecommendedSodium;
+
+      // console.log("Test 4");
+
+
+      res.json(sendReport);
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/add').post((req, res) => {
   const username = req.body.username;
   const email = req.body.email;

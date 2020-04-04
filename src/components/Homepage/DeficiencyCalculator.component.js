@@ -31,12 +31,18 @@ const ironList = ironSymptoms.map((ironSymptoms) =>
     <li>{ironSymptoms}</li>
 );
 
+const vitCSymptoms = ["Dry skin", "Splitting Hair", "Swelling and discoloration of gums", "Sudden and unexpected bleeding from gums", "Nosebleeds", "Poor healing of wounds", "Slow healing of wounds", "Tooth loss"];
+const vitCList = vitCSymptoms.map((vitCSymptoms) =>
+    <li>{vitCSymptoms}</li>
+);
+
 
 const DeficiencyCalculator = (property) => {
     const [foods, setFoods] = useState([]);
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/foods/log/'+property.username)
+        axios.get('http://localhost:5000/foods/deficiency/'+property.username)
         .then(response => {
           setFoods(response.data);
           console.log(response.data);
@@ -44,19 +50,76 @@ const DeficiencyCalculator = (property) => {
         .catch((error) => {
             console.log(error);
         })
+        axios.get('http://localhost:5000/users/deficiency/'+property.username)
+        .then(response => {
+          setUser(response.data);
+          console.log(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        
         
 
     }, []);
     return (
-        <div>
-            <div>
-            <p>Testing</p>
-            <p>{foods[0] !== null && foods[0] !== undefined && console.log(foods[0].description)}</p>
-            <p>{foods[0] !== null && foods[0] !== undefined && foods[0].description}</p>
+        <div className="appContainer">
+
+            <div className="defContainer">
+                { foods.carbs / user.carbs < 0.5 &&
+                <div>
+                    <h3>Carbohydrates Deficiencies</h3>
+                    <ul>{carbsList}</ul>
+                </div>
+                }  
             </div>
-            <div>
-                <h3>Protein Deficiencies</h3> {/* Alter title depending on the list*/}
-                <ul>{proteinList}</ul>
+            <div className="defContainer">
+                { foods.protein / user.protein < 0.5 &&
+                <div>
+                    <h3>Protein Deficiencies</h3>
+                    <ul>{proteinList}</ul>
+                </div>
+                }  
+            </div>
+            <div className="defContainer">
+                { foods.fats / user.fats < 0.5 &&
+                <div>
+                    <h3>Fats Deficiencies</h3>
+                    <ul>{fatsList}</ul>
+                </div>
+                }  
+            </div>
+            <div className="defContainer">
+                { foods.iron / user.iron < 0.5 &&
+                <div>
+                    <h3>Iron Deficiencies</h3>
+                    <ul>{ironList}</ul>
+                </div>
+                }  
+            </div>
+            <div className="defContainer">
+                { foods.calcium / user.calcium < 0.5 &&
+                <div>
+                    <h3>Calcium Deficiencies</h3>
+                    <ul>{calciumList}</ul>
+                </div>
+                }  
+            </div>
+            <div className="defContainer">
+                { foods.sodium / user.sodium < 0.5 &&
+                <div>
+                    <h3>Sodium Deficiencies</h3>
+                    <ul>{sodiumList}</ul>
+                </div>
+                }  
+            </div>
+            <div className="defContainer">
+                { foods.vitaminC / user.vitaminC < 0.5 &&
+                <div>
+                    <h3>Vitamin C Deficiencies</h3>
+                    <ul>{vitCList}</ul>
+                </div>
+                }  
             </div>
         </div>
     );
