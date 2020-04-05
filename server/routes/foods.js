@@ -37,11 +37,22 @@ router.route('/addtolog/:id').post((req, res) => {
   Food.findById(req.params.id)
     .then(food => {
       // console.log(food);
+      var date = new Date()
+      var month = '' + (date.getMonth() + 1),
+      day = '' + date.getDate(),
+      year = date.getFullYear();
+
+      if (month.length < 2) 
+          month = '0' + month;
+      if (day.length < 2) 
+          day = '0' + day;
+      var forDate = [year, month, day].join('-');
+      
       food.username = food.username;
       food.description = food.description;
       food.fdcId = food.fdcId;
       food.servings = food.servings;
-      food.date = new Date();
+      food.date = forDate;
       food.protein = food.protein;
       food.carbs = food.carbs;
       food.fats = food.fats;
@@ -63,7 +74,7 @@ router.route('/add').post((req, res) => {
   const description = req.body.description;
   const fdcId = Number(req.body.fdcId);
   const servings = Number(req.body.servings);
-  const date = Date.parse(req.body.date);
+  const date = req.body.date;
   const protein = Math.round(Number(req.body.protein));
   const carbs = Math.round(Number(req.body.carbs));
   const fats = Math.round(Number(req.body.fats));
@@ -113,7 +124,7 @@ router.route('/update/:id').post((req, res) => {
       food.description = req.body.description;
       food.fdcId = Number(req.body.fdcId);
       food.servings = Number(req.body.servings);
-      food.date = Date.parse(req.body.date);
+      food.date = req.body.date;
       food.protein = Number(req.body.protein);
       food.carbs = Number(req.body.carbs);
       food.fats = Number(req.body.fats);
@@ -176,7 +187,7 @@ router.route('/deficiency/:username').get((req, res) => {
       // console.log(foods)
       var dateID = '';
       for (var i = 0, len = foods.length; i < len; i++) {
-        dateID = foods[i].date.toISOString().substring(0,10);
+        dateID = foods[i].date;
         if (!dayReport["days"].includes(dateID)) {
           dayReport["days"].push(dateID);
         }

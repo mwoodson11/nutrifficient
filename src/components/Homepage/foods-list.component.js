@@ -6,6 +6,7 @@ import axios from 'axios';
 import { NUTRIENT_ENDPOINT } from "../../usdaAPI";
 import ReactTable from 'react-table-6';
 import 'react-table-6/react-table.css';
+import { formatDate } from './Utils';
 
 
 const Food = props => (
@@ -138,13 +139,14 @@ export default class FoodsList extends Component {
             // })
           })
           .then( () => {
+            var forDate = formatDate(this.state.date);
             
             const food = {
               username: this.state.username,
               description: this.state.description,
               fdcId: this.state.fdcId,
               servings: this.state.servings,
-              date: this.state.date,
+              date: forDate,
               protein: this.state.protein,
               carbs: this.state.carbs,
               fats: this.state.fats,
@@ -163,7 +165,7 @@ export default class FoodsList extends Component {
                 axios.get('http://localhost:5000/foods/log/'+this.state.username)
                   .then(response => {
                     this.setState({ foods: response.data });
-                    console.log("Updated food.");
+                    console.log(this.state.foods);
                   })
               })
           })
@@ -281,7 +283,7 @@ export default class FoodsList extends Component {
               width: 100,
               Cell: row => (
                 <div>
-                  {row.original.date.substring(0,10)}
+                  {row.original.date}
                 </div>
               )
             },

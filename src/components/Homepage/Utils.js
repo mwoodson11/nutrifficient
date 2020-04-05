@@ -49,6 +49,20 @@ const calcRatio = (loggedCals, totalCals) => {
   }
 }
 
+const formatDate = date => {
+      var month = '' + (date.getMonth() + 1),
+      day = '' + date.getDate(),
+      year = date.getFullYear();
+
+  if (month.length < 2) 
+      month = '0' + month;
+  if (day.length < 2) 
+      day = '0' + day;
+  
+
+  return [year, month, day].join('-');
+}
+
 const valSort = (a, b) => {
   return b.value - a.value;
 }
@@ -65,4 +79,4 @@ const handleMissingValue = field => {
   }
 };
 
-export { formatedFoodQuery, kCalSum, handleMissingValue, calCalc, calcRatio, valSort };
+export { formatedFoodQuery, kCalSum, handleMissingValue, calCalc, calcRatio, valSort, formatDate };

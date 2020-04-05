@@ -10,7 +10,7 @@ export default class Suggestions extends Component {
 
         this.state = {
             username: props.username,
-            proteinlist: ["here", "hey"],
+            proteinlist: [],
             carbslist: [],
             fatslist: [],
             vitClist: [],

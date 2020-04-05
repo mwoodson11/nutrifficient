@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ReactTable from 'react-table-6';
 import 'react-table-6/react-table.css';
-import {makeData} from "./Utils";
+import {makeData, formatDate} from "./Utils";
 import {Link, withRouter} from 'react-router-dom';
 import { NUTRIENT_ENDPOINT } from "../../usdaAPI";
 import Popup from './Popup';
@@ -108,7 +108,7 @@ export default class FoodAvailable extends Component {
         axios.post('http://localhost:5000/foods/updateServ/'+this.state.id, food)
             .then(res => {
               console.log(res.data);
-              axios.get('http://localhost:5000/foods/log/'+this.state.username)
+              axios.get('http://localhost:5000/foods/pantry/'+this.state.username)
                 .then(response => {
                   this.setState({ foods: response.data });
                   console.log("Updated food.");
@@ -236,12 +236,13 @@ export default class FoodAvailable extends Component {
             // })
           })
           .then( () => {
+            const forDate = formatDate(this.state.date);
             const food = {
               username: this.state.username,
               description: this.state.description,
               fdcId: this.state.fdcId,
               servings: this.state.servings,
-              date: this.state.date,
+              date: forDate,
               protein: this.state.protein,
               carbs: this.state.carbs,
               fats: this.state.fats,
@@ -256,10 +257,10 @@ export default class FoodAvailable extends Component {
           axios.post('http://localhost:5000/foods/add', food)
             .then(res => {
               console.log(res.data);
-              axios.get('http://localhost:5000/foods/log/'+this.state.username)
+              axios.get('http://localhost:5000/foods/pantry/'+this.state.username)
                 .then(response => {
                   this.setState({ foods: response.data });
-                  console.log("Updated food.");
+                  console.log(this.state.foods);
                 })
             });
           })

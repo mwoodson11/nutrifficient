@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 //import PieChart from 'react-simple-pie-chart';
 import {IgrPieChartModule, IgrPieChart} from 'igniteui-react-charts';
 import './NutrientTracker.css';
-import { calCalc, calcRatio } from './Utils';
+import { calCalc, calcRatio, formatDate } from './Utils';
 IgrPieChartModule.register();
 
 var PercentCarbs = 0.4;
@@ -113,14 +113,17 @@ export default class NutrientTracker extends Component {
                 var countIron = 0;
                 var countCalcium = 0;
                 var countSodium = 0;
+                console.log(this.state.date);
+                var date = formatDate(this.state.date);
+                console.log(date);
 
-                console.log(countPro);
+                // console.log(countPro);
                 this.state.foods.forEach(food => {
                     // console.log((this.state.date).toISOString().substring(0,10))
-                    console.log(food.date.substring(0,10))
+                    // console.log(food.date.substring(0,10))
                     // var d = new Date();
                     // d.setDate( d.getDate() - 1 );
-                    if (this.state.date.toISOString().substring(0,10) == food.date.substring(0,10)) {
+                    if (date == food.date) {
                         countPro += food.protein;
                         countFat += food.fats;
                         countCarb += food.carbs;
@@ -130,8 +133,6 @@ export default class NutrientTracker extends Component {
                         countSodium += food.sodium;
                     }
                 });
-                console.log(countPro);
-                console.log(proCal);
 
                 var proRatio = calcRatio(countPro, proCal);
                 var fatRatio = calcRatio(countFat, fatCal);
@@ -184,10 +185,12 @@ export default class NutrientTracker extends Component {
         })
       }
 
-      onChangeDate(date) {
-        console.log(date.toISOString().substring(0,10))
+      onChangeDate(dates) {
+        // console.log(date.toISOString().substring(0,10));
+        console.log(formatDate(dates));
+        var date = formatDate(dates);
         // date.setDate( date.getDate() - 1 );
-        console.log(date.toISOString().substring(0,10))
+        // console.log(date.toISOString().substring(0,10))
         //Calculations for how much this person should eat
         var fatCal = 0;
         var carbCal = 0;
@@ -210,13 +213,14 @@ export default class NutrientTracker extends Component {
         var countIron = 0;
         var countCalcium = 0;
         var countSodium = 0;
+        console.log("Test");
 
-        console.log(countPro);
+        // console.log(countPro);
         this.state.foods.forEach(food => {
             // console.log((this.state.date).toISOString().substring(0,10))
             // console.log(food.date.substring(0,10))
 
-            if (date.toISOString().substring(0,10) == food.date.substring(0,10)) {
+            if (date == food.date) {
                 countPro += food.protein;
                 countFat += food.fats;
                 countCarb += food.carbs;
@@ -230,7 +234,7 @@ export default class NutrientTracker extends Component {
         // console.log(proCal);
 
         var proRatio = calcRatio(countPro, proCal);
-        console.log(proRatio);
+        // console.log(proRatio);
         var fatRatio = calcRatio(countFat, fatCal);
         var carbRatio = calcRatio(countCarb, carbCal);
         var vitCRatio = calcRatio(countVitC, RecommendedVitaminC);
@@ -240,7 +244,7 @@ export default class NutrientTracker extends Component {
 
         // date.setDate( date.getDate() + 1 );
         this.setState({
-            date: date,
+            date: dates,
             proteindata: [
                 {MarketShare: 100 - proRatio},
                 {MarketShare: proRatio}
@@ -271,7 +275,7 @@ export default class NutrientTracker extends Component {
             ]
 
         })
-        console.log(this.state.proteindata)
+        // console.log(this.state.proteindata)
       }
     
 
