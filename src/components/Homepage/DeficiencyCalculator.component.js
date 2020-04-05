@@ -68,7 +68,7 @@ const DeficiencyCalculator = (property) => {
             <div className="defContainer">
                 { foods.carbs / user.carbs < 0.5 &&
                 <div>
-                    <h3>Carbohydrates Deficiencies</h3>
+                    <h3>Carbohydrates Deficiency Symptoms</h3>
                     <ul>{carbsList}</ul>
                 </div>
                 }  
@@ -76,7 +76,7 @@ const DeficiencyCalculator = (property) => {
             <div className="defContainer">
                 { foods.protein / user.protein < 0.5 &&
                 <div>
-                    <h3>Protein Deficiencies</h3>
+                    <h3>Protein Deficiency Symptoms</h3>
                     <ul>{proteinList}</ul>
                 </div>
                 }  
@@ -84,7 +84,7 @@ const DeficiencyCalculator = (property) => {
             <div className="defContainer">
                 { foods.fats / user.fats < 0.5 &&
                 <div>
-                    <h3>Fats Deficiencies</h3>
+                    <h3>Fats Deficiency Symptoms</h3>
                     <ul>{fatsList}</ul>
                 </div>
                 }  
@@ -92,7 +92,7 @@ const DeficiencyCalculator = (property) => {
             <div className="defContainer">
                 { foods.iron / user.iron < 0.5 &&
                 <div>
-                    <h3>Iron Deficiencies</h3>
+                    <h3>Iron Deficiency Symptoms</h3>
                     <ul>{ironList}</ul>
                 </div>
                 }  
@@ -100,7 +100,7 @@ const DeficiencyCalculator = (property) => {
             <div className="defContainer">
                 { foods.calcium / user.calcium < 0.5 &&
                 <div>
-                    <h3>Calcium Deficiencies</h3>
+                    <h3>Calcium Deficiency Symptoms</h3>
                     <ul>{calciumList}</ul>
                 </div>
                 }  
@@ -116,7 +116,7 @@ const DeficiencyCalculator = (property) => {
             <div className="defContainer">
                 { foods.vitaminC / user.vitaminC < 0.5 &&
                 <div>
-                    <h3>Vitamin C Deficiencies</h3>
+                    <h3>Vitamin C Deficiency Symptoms</h3>
                     <ul>{vitCList}</ul>
                 </div>
                 }  
