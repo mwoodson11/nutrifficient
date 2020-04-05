@@ -310,6 +310,7 @@ export default class NutrientTracker extends Component {
                     <h3>Carbs</h3>
                     <p>Recommended Amount : ?</p>
                     <p>Consumed Today: {this.countCarb}</p>
+                    <div className = "piechart">
                     <IgrPieChart
                         dataSource = {this.state.carbsdata}
                         valueMemberPath = "MarketShare"
@@ -318,6 +319,7 @@ export default class NutrientTracker extends Component {
                         height = "100px"
                         brushes = {["#C0C0C0", "#3377ff"]}
                         outlines = {["#C0C0C0", "#3377ff"]} />
+                        </div>
                 </div>
                 <div className = 'vit'>
                     <h3>Fats</h3>

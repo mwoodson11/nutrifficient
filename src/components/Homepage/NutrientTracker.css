@@ -7,11 +7,32 @@ body,
 }
 
 
-.rowC{display: flex; flex-direction: row; text-align: center;}
+.rowC{display: flex; flex-direction: row; }
 
 .vit{
     padding: 10px 10px 10px 10px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    align-items: center;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+h3 {
+    padding:0;
+    margin: 0;
+}
+
+IgrPieChart {
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+}
+
+.piechart {
+    margin: auto;
 }
