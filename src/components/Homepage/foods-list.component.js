@@ -278,6 +278,56 @@ export default class FoodsList extends Component {
               )
             },
             {
+              Header: "Nutrient 8",
+              accessor: "nutrient8",
+              width: 75,
+              Cell: row => (
+                <div>
+                    {/*{row.original.iron * row.original.servings} mg */}
+                </div>
+              )
+            },
+            {
+              Header: "Nutrient 9",
+              accessor: "nutrient9",
+              width: 75,
+              Cell: row => (
+                <div>
+                    {/*{row.original.iron * row.original.servings} mg */}
+                </div>
+              )
+            },
+            {
+              Header: "Nutrient 10",
+              accessor: "nutrient10",
+              width: 75,
+              Cell: row => (
+                <div>
+                    {/*{row.original.iron * row.original.servings} mg */}
+                </div>
+              )
+            },
+            {
+              Header: "Nutrient 11",
+              accessor: "nutrient11",
+              width: 75,
+              Cell: row => (
+                <div>
+                    {/*{row.original.iron * row.original.servings} mg */}
+                </div>
+              )
+            },
+            {
+              Header: "Nutrient 12",
+              accessor: "nutrient12",
+              width: 75,
+              Cell: row => (
+                <div>
+                    {/*{row.original.iron * row.original.servings} mg */}
+                </div>
+              )
+            },
+            {
               Header: "Date",
               accessor: "date",
               width: 100,

@@ -272,7 +272,7 @@ export default class NutrientTracker extends Component {
             vitCdata: [
                 {MarketShare: 100 - vitCRatio, Company: "vit"},
                 {MarketShare: vitCRatio, Company: "missing"}
-            ]
+            ],
 
         })
         // console.log(this.state.proteindata)
@@ -295,6 +295,8 @@ export default class NutrientTracker extends Component {
             <div className = 'rowC'>
                 <div className = 'vit'>
                     <h3>Protein</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: {this.countPro}</p>
                     <IgrPieChart
                          dataSource = {this.state.proteindata}
                         valueMemberPath = "MarketShare"
@@ -306,6 +308,8 @@ export default class NutrientTracker extends Component {
                 </div>
                 <div className = 'vit'>
                     <h3>Carbs</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: {this.countCarb}</p>
                     <IgrPieChart
                         dataSource = {this.state.carbsdata}
                         valueMemberPath = "MarketShare"
@@ -317,6 +321,8 @@ export default class NutrientTracker extends Component {
                 </div>
                 <div className = 'vit'>
                     <h3>Fats</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: {this.countFat}</p>
                     <IgrPieChart
                         dataSource = {this.state.fatsdata}
                         valueMemberPath = "MarketShare"
@@ -328,19 +334,10 @@ export default class NutrientTracker extends Component {
                 </div>
                 <div className = 'vit'>
                     <h3>Sodium</h3>
+                    <p>Recommended Amount : {this.RecommendedSodium}</p>
+                    <p>Consumed Today: {this.countSodium}</p>
                     <IgrPieChart
                         dataSource = {this.state.sodiumdata}
-                        valueMemberPath = "MarketShare"
-                        //labelMemberPath = "Company"
-                        width = "100px"
-                        height = "100px"
-                        brushes = {["#C0C0C0", "#3377ff"]}
-                        outlines = {["#C0C0C0", "#3377ff"]} />
-                </div>
-                <div className = 'vit'>
-                    <h3>Calcium</h3>
-                    <IgrPieChart
-                        dataSource = {this.state.calciumdata}
                         valueMemberPath = "MarketShare"
                         //labelMemberPath = "Company"
                         width = "100px"
@@ -351,7 +348,22 @@ export default class NutrientTracker extends Component {
             </div>
             <div className = 'rowC'>
                 <div className = 'vit'>
+                    <h3>Calcium</h3>
+                    <p>Recommended Amount : {this.RecommendedCalcium}</p>
+                    <p>Consumed Today: {this.countCalcium}</p>
+                    <IgrPieChart
+                        dataSource = {this.state.calciumdata}
+                        valueMemberPath = "MarketShare"
+                        //labelMemberPath = "Company"
+                        width = "100px"
+                        height = "100px"
+                        brushes = {["#C0C0C0", "#3377ff"]}
+                        outlines = {["#C0C0C0", "#3377ff"]} />
+                </div>
+                <div className = 'vit'>
                     <h3>Iron</h3>
+                    <p>Recommended Amount : {this.RecommendedIron}</p>
+                    <p>Consumed Today: {this.countIron}</p>
                     <IgrPieChart
                         dataSource = {this.state.irondata}
                         valueMemberPath = "MarketShare"
@@ -363,6 +375,8 @@ export default class NutrientTracker extends Component {
                 </div>
                 <div className = 'vit'>
                     <h3>Vitamin C</h3>
+                    <p>Recommended Amount : {this.RecommendedVitaminC}</p>
+                    <p>Consumed Today: {this.countVitC}</p>
                     <IgrPieChart
                         dataSource = {this.state.vitCdata}
                         valueMemberPath = "MarketShare"
@@ -372,7 +386,73 @@ export default class NutrientTracker extends Component {
                         brushes = {["#C0C0C0", "#3377ff"]}
                         outlines = {["#C0C0C0", "#3377ff"]} />
                 </div>
-                
+                <div className = 'vit'>
+                    <h3>Vitamin 8</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: ?</p>
+                    <IgrPieChart
+                        dataSource = {this.state.vitCdata} //change this
+                        valueMemberPath = "MarketShare"
+                        //labelMemberPath = "Company"
+                        width = "100px"
+                        height = "100px"
+                        brushes = {["#C0C0C0", "#3377ff"]}
+                        outlines = {["#C0C0C0", "#3377ff"]} />
+                </div>   
+            </div>
+            <div className = 'rowC'>
+                <div className = 'vit'>
+                    <h3>Vitamin 9</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: ?</p>
+                    <IgrPieChart
+                        dataSource = {this.state.calciumdata} //change this
+                        valueMemberPath = "MarketShare"
+                        //labelMemberPath = "Company"
+                        width = "100px"
+                        height = "100px"
+                        brushes = {["#C0C0C0", "#3377ff"]}
+                        outlines = {["#C0C0C0", "#3377ff"]} />
+                </div>
+                <div className = 'vit'>
+                    <h3>Vitamin 10</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: ?</p>
+                    <IgrPieChart
+                        dataSource = {this.state.irondata} //change this
+                        valueMemberPath = "MarketShare"
+                        //labelMemberPath = "Company"
+                        width = "100px"
+                        height = "100px"
+                        brushes = {["#C0C0C0", "#3377ff"]}
+                        outlines = {["#C0C0C0", "#3377ff"]} />
+                </div>
+                <div className = 'vit'>
+                    <h3>Vitamin 11</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: ?</p>
+                    <IgrPieChart
+                        dataSource = {this.state.vitCdata} //change this
+                        valueMemberPath = "MarketShare"
+                        //labelMemberPath = "Company"
+                        width = "100px"
+                        height = "100px"
+                        brushes = {["#C0C0C0", "#3377ff"]}
+                        outlines = {["#C0C0C0", "#3377ff"]} />
+                </div>
+                <div className = 'vit'>
+                    <h3>Vitamin 12</h3>
+                    <p>Recommended Amount : ?</p>
+                    <p>Consumed Today: ?</p>
+                    <IgrPieChart
+                        dataSource = {this.state.vitCdata} //change this 
+                        valueMemberPath = "MarketShare"
+                        //labelMemberPath = "Company"
+                        width = "100px"
+                        height = "100px"
+                        brushes = {["#C0C0C0", "#3377ff"]}
+                        outlines = {["#C0C0C0", "#3377ff"]} />
+                </div>   
             </div>
         </div>
 

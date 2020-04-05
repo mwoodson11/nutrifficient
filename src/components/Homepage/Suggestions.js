@@ -16,6 +16,7 @@ export default class Suggestions extends Component {
             vitClist: [],
             calciumlist: [],
             ironlist: [],
+            sodiumList:[],
             foods: []
         };
 
@@ -30,6 +31,7 @@ export default class Suggestions extends Component {
             var vitList = [];
             var calList = [];
             var iroList = [];
+            var sodList = [];
 
             response.data.forEach(food => {
                 if (food.protein > 0) {
@@ -41,7 +43,7 @@ export default class Suggestions extends Component {
                 if (food.fats > 0) {
                     fatList.push({description: food.description, value: food.fats});
                 }
-                if (food.sodium > 0) {
+                if (food.vitaminC > 0) {
                     vitList.push({description: food.description, value: food.vitaminC});
                 }
                 if (food.calcium > 0) {
@@ -49,6 +51,9 @@ export default class Suggestions extends Component {
                 }
                 if (food.iron > 0) {
                     iroList.push({description: food.description, value: food.iron});
+                }
+                if (food.sodium > 0) {
+                    sodList.push({description: food.description, value: food.sodium});
                 }
             });
 
@@ -58,6 +63,7 @@ export default class Suggestions extends Component {
             vitList.sort(valSort);
             calList.sort(valSort);
             iroList.sort(valSort);
+            sodList.sort(valSort);
             // proList.sort(valSort);
 
             this.setState({ 
@@ -67,7 +73,8 @@ export default class Suggestions extends Component {
                 fatslist: fatList,
                 vitClist: vitList,
                 calciumlist: calList,
-                ironlist: iroList
+                ironlist: iroList,
+                sodiumList: sodList
 
 
             });
@@ -242,6 +249,166 @@ export default class Suggestions extends Component {
             />
             </div>
             </div> 
+            <div className = "rowC">
+            <div className = "vit">
+                <h3>Sodium</h3>
+                <ReactTable 
+                    data = {this.state.sodiumList}
+                    columns = {[
+                    {
+                        Header: "Name",
+                        accessor: "description"
+                    },
+                    { 
+                        Header: "Amount",
+                        accessor: "value",
+                        Cell: row => (
+                            <div>
+                                {row.original.value} mg? {/*is this grams or mg? */}
+                            </div>
+                          )
+                    }
+                ]}
+                defaultPageSize = {20}
+                style = {{
+                    height : "200px"
+                }}
+                className = "-striped -highlight"
+            />
+            </div>
+            <div className = "vit">
+                <h3>Vitamin 8</h3>
+                <ReactTable 
+                    data = {this.state.carbslist}
+                    columns = {[
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} g
+                                </div>
+                              )
+                        }
+                ]}
+                defaultPageSize = {20}
+                style = {{
+                    height : "200px"
+                }}
+                className = "-striped -highlight"
+            />
+            </div>
+            <div className = "vit">
+                <h3>Vitamin 9</h3>
+                <ReactTable 
+                    data = {this.state.fatslist}
+                    columns = {[
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} g
+                                </div>
+                              )
+                        }
+                ]}
+                defaultPageSize = {20}
+                style = {{
+                    height : "200px"
+                }}
+                className = "-striped -highlight"
+            />
+            </div>
+            </div>
+            <div className = "rowC">
+            <div className = "vit">
+                <h3>Vitamin 10</h3>
+                <ReactTable 
+                    data = {proteindata}
+                    columns = {[
+                    {
+                        Header: "Name",
+                        accessor: "description"
+                    },
+                    { 
+                        Header: "Amount",
+                        accessor: "value",
+                        Cell: row => (
+                            <div>
+                                {row.original.value} g
+                            </div>
+                          )
+                    }
+                ]}
+                defaultPageSize = {20}
+                style = {{
+                    height : "200px"
+                }}
+                className = "-striped -highlight"
+            />
+            </div>
+            <div className = "vit">
+                <h3>Vitamin 11</h3>
+                <ReactTable 
+                    data = {this.state.carbslist}
+                    columns = {[
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} g
+                                </div>
+                              )
+                        }
+                ]}
+                defaultPageSize = {20}
+                style = {{
+                    height : "200px"
+                }}
+                className = "-striped -highlight"
+            />
+            </div>
+            <div className = "vit">
+                <h3>Vitamin 12</h3>
+                <ReactTable 
+                    data = {this.state.fatslist}
+                    columns = {[
+                        {
+                            Header: "Name",
+                            accessor: "description"
+                        },
+                        { 
+                            Header: "Amount",
+                            accessor: "value",
+                            Cell: row => (
+                                <div>
+                                    {row.original.value} g
+                                </div>
+                              )
+                        }
+                ]}
+                defaultPageSize = {20}
+                style = {{
+                    height : "200px"
+                }}
+                className = "-striped -highlight"
+            />
+            </div>
+            </div>
         </div>
         )
     }

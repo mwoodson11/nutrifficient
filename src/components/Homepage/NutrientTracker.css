@@ -7,7 +7,7 @@ body,
 }
 
 
-.rowC{display: flex; flex-direction: row;}
+.rowC{display: flex; flex-direction: row; text-align: center;}
 
 .vit{
     padding: 10px 10px 10px 10px;
