@@ -304,7 +304,7 @@ export default class FoodsList extends Component {
               width: 75,
               Cell: row => (
                 <div>
-                    {row.original.vitaminA * row.original.servings} mcg
+                    {row.original.vitaminA * row.original.servings} mg
                 </div>
               )
             },
