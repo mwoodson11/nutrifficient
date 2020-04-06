@@ -16,7 +16,12 @@ export default class Suggestions extends Component {
             vitClist: [],
             calciumlist: [],
             ironlist: [],
-            sodiumList:[],
+            sodiumlist:[],
+            vitAlist: [],
+            vitElist: [],
+            potassiumlist: [],
+            magnesiumlist: [],
+            fiberlist : [],
             foods: []
         };
 
@@ -32,6 +37,11 @@ export default class Suggestions extends Component {
             var calList = [];
             var iroList = [];
             var sodList = [];
+            var vitAAList = [];
+            var vitEEList = [];
+            var potList = [];
+            var magList = [];
+            var fibList = [];
 
             response.data.forEach(food => {
                 if (food.protein > 0) {
@@ -55,6 +65,21 @@ export default class Suggestions extends Component {
                 if (food.sodium > 0) {
                     sodList.push({description: food.description, value: food.sodium});
                 }
+                if (food.vitaminA > 0) {
+                    vitAAList.push({description: food.description, value: food.vitaminA});
+                }
+                if (food.vitaminE > 0) {
+                    vitEEList.push({description: food.description, value: food.vitaminE});
+                }
+                if (food.potassium > 0) {
+                    potList.push({description: food.description, value: food.potassium});
+                }
+                if (food.magnesium > 0) {
+                    magList.push({description: food.description, value: food.magnesium});
+                }
+                if (food.fiber > 0) {
+                    fibList.push({description: food.description, value: food.fiber});
+                }
             });
 
             proList.sort(valSort);
@@ -64,6 +89,11 @@ export default class Suggestions extends Component {
             calList.sort(valSort);
             iroList.sort(valSort);
             sodList.sort(valSort);
+            vitAAList.sort(valSort);
+            vitEEList.sort(valSort);
+            potList.sort(valSort);
+            magList.sort(valSort);
+            fibList.sort(valSort);
             // proList.sort(valSort);
 
             this.setState({ 
@@ -74,7 +104,12 @@ export default class Suggestions extends Component {
                 vitClist: vitList,
                 calciumlist: calList,
                 ironlist: iroList,
-                sodiumList: sodList
+                sodiumlist: sodList,
+                vitAlist: vitAAList,
+                vitElist: vitEEList,
+                potassiumlist: potList,
+                magnesiumlist: magList,
+                fiberlist: fibList
 
 
             });
@@ -253,7 +288,7 @@ export default class Suggestions extends Component {
             <div className = "vit">
                 <h3>Sodium</h3>
                 <ReactTable 
-                    data = {this.state.sodiumList}
+                    data = {this.state.sodiumlist}
                     columns = {[
                     {
                         Header: "Name",
@@ -264,7 +299,7 @@ export default class Suggestions extends Component {
                         accessor: "value",
                         Cell: row => (
                             <div>
-                                {row.original.value} mg? {/*is this grams or mg? */}
+                                {row.original.value} mg {/*is this grams or mg? */}
                             </div>
                           )
                     }
@@ -277,9 +312,9 @@ export default class Suggestions extends Component {
             />
             </div>
             <div className = "vit">
-                <h3>Vitamin 8</h3>
+                <h3>Vitamin A</h3>
                 <ReactTable 
-                    data = {this.state.carbslist}
+                    data = {this.state.vitAlist}
                     columns = {[
                         {
                             Header: "Name",
@@ -290,7 +325,7 @@ export default class Suggestions extends Component {
                             accessor: "value",
                             Cell: row => (
                                 <div>
-                                    {row.original.value} g
+                                    {row.original.value} mg
                                 </div>
                               )
                         }
@@ -303,9 +338,9 @@ export default class Suggestions extends Component {
             />
             </div>
             <div className = "vit">
-                <h3>Vitamin 9</h3>
+                <h3>Vitamin E</h3>
                 <ReactTable 
-                    data = {this.state.fatslist}
+                    data = {this.state.vitElist}
                     columns = {[
                         {
                             Header: "Name",
@@ -316,7 +351,7 @@ export default class Suggestions extends Component {
                             accessor: "value",
                             Cell: row => (
                                 <div>
-                                    {row.original.value} g
+                                    {row.original.value} mg
                                 </div>
                               )
                         }
@@ -331,9 +366,9 @@ export default class Suggestions extends Component {
             </div>
             <div className = "rowC">
             <div className = "vit">
-                <h3>Vitamin 10</h3>
+                <h3>Potassium</h3>
                 <ReactTable 
-                    data = {proteindata}
+                    data = {this.state.potassiumlist}
                     columns = {[
                     {
                         Header: "Name",
@@ -344,7 +379,7 @@ export default class Suggestions extends Component {
                         accessor: "value",
                         Cell: row => (
                             <div>
-                                {row.original.value} g
+                                {row.original.value} mg
                             </div>
                           )
                     }
@@ -357,9 +392,9 @@ export default class Suggestions extends Component {
             />
             </div>
             <div className = "vit">
-                <h3>Vitamin 11</h3>
+                <h3>Magnesium</h3>
                 <ReactTable 
-                    data = {this.state.carbslist}
+                    data = {this.state.magnesiumlist}
                     columns = {[
                         {
                             Header: "Name",
@@ -370,7 +405,7 @@ export default class Suggestions extends Component {
                             accessor: "value",
                             Cell: row => (
                                 <div>
-                                    {row.original.value} g
+                                    {row.original.value} mg
                                 </div>
                               )
                         }
@@ -383,9 +418,9 @@ export default class Suggestions extends Component {
             />
             </div>
             <div className = "vit">
-                <h3>Vitamin 12</h3>
+                <h3>Fiber</h3>
                 <ReactTable 
-                    data = {this.state.fatslist}
+                    data = {this.state.fiberlist}
                     columns = {[
                         {
                             Header: "Name",
@@ -396,7 +431,7 @@ export default class Suggestions extends Component {
                             accessor: "value",
                             Cell: row => (
                                 <div>
-                                    {row.original.value} g
+                                    {row.original.value} mg
                                 </div>
                               )
                         }
