@@ -42,6 +42,7 @@ const calCalc = (gender, weight, height, age) => {
 
 const calcRatio = (loggedCals, totalCals) => {
   var val = loggedCals/totalCals;
+  console.log(val, loggedCals, totalCals);
   if (val > 1) {
     return 100;
   } else {

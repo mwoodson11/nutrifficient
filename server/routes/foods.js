@@ -48,18 +48,18 @@ router.route('/addtolog/:id').post((req, res) => {
           day = '0' + day;
       var forDate = [year, month, day].join('-');
       
-      food.username = food.username;
-      food.description = food.description;
-      food.fdcId = food.fdcId;
-      food.servings = food.servings;
-      food.date = forDate;
-      food.protein = food.protein;
-      food.carbs = food.carbs;
-      food.fats = food.fats;
-      food.sodium = food.sodium;
-      food.calcium = food.calcium;
-      food.vitaminC = food.vitaminC;
-      food.iron = food.iron;
+      // food.username = food.username;
+      // food.description = food.description;
+      // food.fdcId = food.fdcId;
+      // food.servings = food.servings;
+      // food.date = forDate;
+      // food.protein = food.protein;
+      // food.carbs = food.carbs;
+      // food.fats = food.fats;
+      // food.sodium = food.sodium;
+      // food.calcium = food.calcium;
+      // food.vitaminC = food.vitaminC;
+      // food.iron = food.iron;
       food.pantry = false;
 
       food.save()
@@ -82,6 +82,11 @@ router.route('/add').post((req, res) => {
   const calcium = Math.round(Number(req.body.calcium));
   const vitaminC = Math.round(Number(req.body.vitaminC));
   const iron = Math.round(Number(req.body.iron));
+  const potassium = Math.round(Number(req.body.potassium));
+  const magnesium = Math.round(Number(req.body.magnesium));
+  const vitaminA = Math.round(Number(req.body.vitaminA));
+  const vitaminE = Math.round(Number(req.body.vitaminE));
+  const fiber = Math.round(Number(req.body.fiber));
   const pantry = req.body.pantry;
 
   const newFood = new Food({
@@ -97,6 +102,11 @@ router.route('/add').post((req, res) => {
     calcium,
     vitaminC,
     iron,
+    potassium,
+    magnesium,
+    vitaminA,
+    vitaminE,
+    fiber,
     pantry
   });
 
@@ -132,6 +142,12 @@ router.route('/update/:id').post((req, res) => {
       food.calcium = Number(req.body.calcium);
       food.vitaminC = Number(req.body.vitaminC);
       food.iron = Number(req.body.iron);
+      food.vitaminA = Number(req.body.vitaminA);
+      food.vitaminE = Number(req.body.vitaminE);
+      food.potassium = Number(req.body.potassium);
+      food.magnesium = Number(req.body.magnesium);
+      food.fiber = Number(req.body.fiber);
+      
       food.pantry = req.body.pantry;
 
       food.save()
@@ -145,19 +161,19 @@ router.route('/updateServ/:id').post((req, res) => {
   Food.findById(req.params.id)
     .then(food => {
       // console.log(food);
-      food.username = food.username;
-      food.description = food.description;
-      food.fdcId = food.fdcId;
+      // food.username = food.username;
+      // food.description = food.description;
+      // food.fdcId = food.fdcId;
       food.servings = Number(req.body.servings);
-      food.date = food.date;
-      food.protein = food.protein;
-      food.carbs = food.carbs;
-      food.fats = food.fats;
-      food.sodium = food.sodium;
-      food.calcium = food.calcium;
-      food.vitaminC = food.vitaminC;
-      food.iron = food.iron;
-      food.pantry = food.pantry;
+      // food.date = food.date;
+      // food.protein = food.protein;
+      // food.carbs = food.carbs;
+      // food.fats = food.fats;
+      // food.sodium = food.sodium;
+      // food.calcium = food.calcium;
+      // food.vitaminC = food.vitaminC;
+      // food.iron = food.iron;
+      // food.pantry = food.pantry;
 
       food.save()
         .then(() => res.json('Food updated!'))
@@ -178,6 +194,11 @@ router.route('/deficiency/:username').get((req, res) => {
   dayReport["iron"] = 0;
   dayReport["calcium"] = 0;
   dayReport["sodium"] = 0;
+  dayReport["vitaminA"] = 0;
+  dayReport["vitaminE"] = 0;
+  dayReport["potassium"] = 0;
+  dayReport["magnesium"] = 0;
+  dayReport["fiber"] = 0;
   // console.log(dayReport);
   Food.find({
     'username': req.params.username,
@@ -198,6 +219,11 @@ router.route('/deficiency/:username').get((req, res) => {
         dayReport["iron"] += foods[i].iron;
         dayReport["calcium"] += foods[i].calcium;
         dayReport["sodium"] += foods[i].sodium;
+        dayReport["vitaminA"] += foods[i].vitaminA;
+        dayReport["vitaminE"] += foods[i].vitaminE;
+        dayReport["potassium"] += foods[i].potassium;
+        dayReport["magnesium"] += foods[i].magnesium;
+        dayReport["fiber"] += foods[i].fiber;
         // console.log(dayReport);
       }
 
@@ -210,6 +236,12 @@ router.route('/deficiency/:username').get((req, res) => {
       sendReport["iron"] = dayReport["iron"] / days;
       sendReport["calcium"] = dayReport["calcium"] / days;
       sendReport["sodium"] = dayReport["sodium"] / days;
+      sendReport["vitaminA"] = dayReport["vitaminA"] / days;
+      sendReport["vitaminE"] = dayReport["vitaminE"] / days;
+      sendReport["potassium"] = dayReport["potassium"] / days;
+      sendReport["magnesium"] = dayReport["magnesium"] / days;
+      sendReport["fiber"] = dayReport["fiber"] / days;
+
       console.log(sendReport);
 
       // can be used for purposes later to only look at more recent days instead of all days

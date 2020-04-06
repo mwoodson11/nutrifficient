@@ -11,24 +11,9 @@ import { NUTRIENT_ENDPOINT } from "../../usdaAPI";
 import Popup from './Popup';
 
 
-const Food = props => (
-  <tr>
-    <td>{props.food.username}</td>
-    <td>{props.food.description}</td>
-    <td>{props.food.servings}</td>
-    <td>{props.food.date.substring(0,10)}</td>
-    <td>
-      <Link to={"/edit/"+props.food._id}>edit</Link> | <a href="#" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
-    </td>
-  </tr>
-)
-
-
 export default class FoodAvailable extends Component {
     constructor(props) {
         super(props);
-
-
         // this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
         this.onChangeServings = this.onChangeServings.bind(this);
@@ -36,12 +21,11 @@ export default class FoodAvailable extends Component {
         this.handlePopupChange = this.handlePopupChange.bind(this);
         this.handlePopupSubmit = this.handlePopupSubmit.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.deleteFood = this.deleteFood.bind(this);
 
         this.state = {
           id: '',
           username: props.username,
-          description: 'food name',
+          description: '',
           fdcId: 0,
           servings: 0,
           date: new Date(),
@@ -52,6 +36,11 @@ export default class FoodAvailable extends Component {
           calcium: 0,
           vitaminC: 0,
           iron: 0,
+          vitaminA: 0,
+          vitaminE: 0,
+          potassium: 0,
+          magnesium: 0,
+          fiber: 0,
           // users: [],
           pantry: true,
           data: makeData(),
@@ -170,25 +159,6 @@ export default class FoodAvailable extends Component {
 
       }
 
-      deleteFood(id) {
-        axios.delete('http://localhost:5000/foods/'+id)
-            .then(res => console.log(res.data));
-        this.setState({
-            exercises: this.state.foods.filter(el => el._id !== id)
-        })
-      }
-
-      foodList() {
-        return this.state.foods.map(currentfood => {
-          return <Food food={currentfood} deleteFood={this.deleteFood} key={currentfood._id}/>;
-        })
-      }
-
-      // onChangeUsername(e) {
-      //   this.setState({
-      //     username: e.target.value
-      //   });
-      // }
       onChangeDescription(e) {
         this.setState({
           description: e.target.value
@@ -229,6 +199,16 @@ export default class FoodAvailable extends Component {
                 this.setState({vitaminC: nutr.amount});
               } else if (nutr.nutrient.id == 1089) {
                 this.setState({iron: nutr.amount});
+              } else if (nutr.nutrient.id == 1106) {
+                this.setState({vitaminA: nutr.amount});
+              } else if (nutr.nutrient.id == 1109) {
+                this.setState({vitaminE: nutr.amount});
+              } else if (nutr.nutrient.id == 1092) {
+                this.setState({potassium: nutr.amount});
+              } else if (nutr.nutrient.id == 1090) {
+                this.setState({magnesium: nutr.amount});
+              } else if (nutr.nutrient.id == 1079) {
+                this.setState({fiber: nutr.amount});
               }
             })
             // this.setState({
@@ -250,6 +230,11 @@ export default class FoodAvailable extends Component {
               calcium: this.state.calcium,
               vitaminC: this.state.vitaminC,
               iron: this.state.iron,
+              vitaminA: this.state.vitaminA,
+              vitaminE: this.state.vitaminE,
+              potassium: this.state.potassium,
+              magnesium: this.state.magnesium,
+              fiber: this.state.fiber,
               pantry: this.state.pantry
             };
     

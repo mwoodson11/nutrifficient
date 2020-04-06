@@ -47,6 +47,11 @@ router.route('/deficiency/:username').get((req, res) => {
       var RecommendedIron = 18;
       var RecommendedCalcium = 1300;
       var RecommendedSodium = 2300;
+      var RecommendedVitaminA = 900;
+      var RecommendedVitaminE = 15;
+      var RecommendedPotassium = 3000;
+      var RecommendedMagnesium = 350;
+      var RecommendedFiber = 15;
       // console.log(user);
 
 
@@ -73,6 +78,12 @@ router.route('/deficiency/:username').get((req, res) => {
       sendReport["iron"] = RecommendedIron;
       sendReport["calcium"] = RecommendedCalcium;
       sendReport["sodium"] = RecommendedSodium;
+      sendReport["vitaminA"] = RecommendedVitaminA;
+      sendReport["vitaminE"] = RecommendedVitaminE;
+      sendReport["potassium"] = RecommendedPotassium;
+      sendReport["magnesium"] = RecommendedMagnesium;
+      sendReport["fiber"] = RecommendedFiber;
+
 
       // console.log("Test 4");
 

@@ -9,24 +9,24 @@ import 'react-table-6/react-table.css';
 import { formatDate } from './Utils';
 
 
-const Food = props => (
-    <tr>
-      {/* <td>{props.food.username}</td> */}
-      <td>{props.food.description}</td>
-      <td>{props.food.servings}</td>
-      <td>{props.food.protein}</td>
-      <td>{props.food.carbs}</td>
-      <td>{props.food.fats}</td>
-      <td>{props.food.sodium}</td>
-      <td>{props.food.calcium}</td>
-      <td>{props.food.vitaminC}</td>
-      <td>{props.food.iron}</td>
-      <td>{props.food.date.substring(0,10)}</td>
-      <td>
-        <Link to={"/edit/"+props.food._id}>edit</Link> | <a href="/create" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
-      </td>
-    </tr>
-)
+// const Food = props => (
+//     <tr>
+//       {/* <td>{props.food.username}</td> */}
+//       <td>{props.food.description}</td>
+//       <td>{props.food.servings}</td>
+//       <td>{props.food.protein}</td>
+//       <td>{props.food.carbs}</td>
+//       <td>{props.food.fats}</td>
+//       <td>{props.food.sodium}</td>
+//       <td>{props.food.calcium}</td>
+//       <td>{props.food.vitaminC}</td>
+//       <td>{props.food.iron}</td>
+//       <td>{props.food.date.substring(0,10)}</td>
+//       <td>
+//         <Link to={"/edit/"+props.food._id}>edit</Link> | <a href="/create" onClick={() => { props.deleteFood(props.food._id) }}>delete</a>
+//       </td>
+//     </tr>
+// )
 
 export default class FoodsList extends Component {
     constructor(props) {
@@ -49,6 +49,11 @@ export default class FoodsList extends Component {
           calcium: 0,
           vitaminC: 0,
           iron: 0,
+          vitaminA: 0,
+          vitaminE: 0,
+          potassium: 0,
+          magnesium: 0,
+          fiber: 0,
           pantry: false,
           // users: [],
           foods: []
@@ -87,11 +92,11 @@ export default class FoodsList extends Component {
     }
 
 
-    foodList() {
-        return this.state.foods.map(currentfood => {
-          return <Food food={currentfood} deleteFood={this.deleteFood} key={currentfood._id}/>;
-        })
-      }
+    // foodList() {
+    //     return this.state.foods.map(currentfood => {
+    //       return <Food food={currentfood} deleteFood={this.deleteFood} key={currentfood._id}/>;
+    //     })
+    //   }
 
       onChangeDescription(e) {
         this.setState({
@@ -132,7 +137,18 @@ export default class FoodsList extends Component {
                 this.setState({vitaminC: nutr.amount});
               } else if (nutr.nutrient.id == 1089) {
                 this.setState({iron: nutr.amount});
+              } else if (nutr.nutrient.id == 1106) {
+                this.setState({vitaminA: nutr.amount});
+              } else if (nutr.nutrient.id == 1109) {
+                this.setState({vitaminE: nutr.amount});
+              } else if (nutr.nutrient.id == 1092) {
+                this.setState({potassium: nutr.amount});
+              } else if (nutr.nutrient.id == 1090) {
+                this.setState({magnesium: nutr.amount});
+              } else if (nutr.nutrient.id == 1079) {
+                this.setState({fiber: nutr.amount});
               }
+              
             })
             // this.setState({
             //   apiSearchList: listObj.foods
@@ -154,6 +170,11 @@ export default class FoodsList extends Component {
               calcium: this.state.calcium,
               vitaminC: this.state.vitaminC,
               iron: this.state.iron,
+              vitaminA: this.state.vitaminA,
+              vitaminE: this.state.vitaminE,
+              potassium: this.state.potassium,
+              magnesium: this.state.magnesium,
+              fiber: this.state.fiber,
               pantry: this.state.pantry
             };
             console.log(food);
@@ -278,52 +299,52 @@ export default class FoodsList extends Component {
               )
             },
             {
-              Header: "Nutrient 8",
-              accessor: "nutrient8",
+              Header: "Vitamin A",
+              accessor: "vitaminA",
               width: 75,
               Cell: row => (
                 <div>
-                    {/*{row.original.iron * row.original.servings} mg */}
+                    {row.original.vitaminA * row.original.servings} mcg
                 </div>
               )
             },
             {
-              Header: "Nutrient 9",
-              accessor: "nutrient9",
+              Header: "Vitamin E",
+              accessor: "vitaminE",
               width: 75,
               Cell: row => (
                 <div>
-                    {/*{row.original.iron * row.original.servings} mg */}
+                    {row.original.vitaminE * row.original.servings} mg
                 </div>
               )
             },
             {
-              Header: "Nutrient 10",
-              accessor: "nutrient10",
+              Header: "Potassium",
+              accessor: "potassium",
               width: 75,
               Cell: row => (
                 <div>
-                    {/*{row.original.iron * row.original.servings} mg */}
+                    {row.original.potassium * row.original.servings} mg
                 </div>
               )
             },
             {
-              Header: "Nutrient 11",
-              accessor: "nutrient11",
+              Header: "Magnesium",
+              accessor: "magnesium",
               width: 75,
               Cell: row => (
                 <div>
-                    {/*{row.original.iron * row.original.servings} mg */}
+                    {row.original.magnesium * row.original.servings} mg
                 </div>
               )
             },
             {
-              Header: "Nutrient 12",
-              accessor: "nutrient12",
+              Header: "Fiber",
+              accessor: "fiber",
               width: 75,
               Cell: row => (
                 <div>
-                    {/*{row.original.iron * row.original.servings} mg */}
+                    {row.original.fiber * row.original.servings} mg
                 </div>
               )
             },

@@ -14,6 +14,11 @@ const foodSchema = new Schema({
   calcium: { type: Number, required: true },
   vitaminC: { type: Number, required: true },
   iron: { type: Number, required: true },
+  vitaminA: { type: Number, required: true },
+  vitaminE: { type: Number, required: true },
+  magnesium: { type: Number, required: true },
+  potassium: { type: Number, required: true },
+  fiber: { type: Number, required: true },
   date: { type: String, required: true },
   pantry: { type: Boolean, required: true}
 }, {
