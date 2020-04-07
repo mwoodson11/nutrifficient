@@ -46,7 +46,7 @@ router.route('/addtolog/:id').post((req, res) => {
           month = '0' + month;
       if (day.length < 2) 
           day = '0' + day;
-      var forDate = [year, month, day].join('-');
+      // var forDate = [year, month, day].join('-');
       
       // food.username = food.username;
       // food.description = food.description;
@@ -212,18 +212,18 @@ router.route('/deficiency/:username').get((req, res) => {
         if (!dayReport["days"].includes(dateID)) {
           dayReport["days"].push(dateID);
         }
-        dayReport["protein"] += foods[i].protein;
-        dayReport["carbs"] += foods[i].carbs;
-        dayReport["fats"] += foods[i].fats;
-        dayReport["vitaminC"] += foods[i].vitaminC;
-        dayReport["iron"] += foods[i].iron;
-        dayReport["calcium"] += foods[i].calcium;
-        dayReport["sodium"] += foods[i].sodium;
-        dayReport["vitaminA"] += foods[i].vitaminA;
-        dayReport["vitaminE"] += foods[i].vitaminE;
-        dayReport["potassium"] += foods[i].potassium;
-        dayReport["magnesium"] += foods[i].magnesium;
-        dayReport["fiber"] += foods[i].fiber;
+        dayReport["protein"] += foods[i].protein * foods[i].servings;
+        dayReport["carbs"] += foods[i].carbs * foods[i].servings;
+        dayReport["fats"] += foods[i].fats * foods[i].servings;
+        dayReport["vitaminC"] += foods[i].vitaminC * foods[i].servings;
+        dayReport["iron"] += foods[i].iron * foods[i].servings;
+        dayReport["calcium"] += foods[i].calcium * foods[i].servings;
+        dayReport["sodium"] += foods[i].sodium * foods[i].servings;
+        dayReport["vitaminA"] += foods[i].vitaminA * foods[i].servings;
+        dayReport["vitaminE"] += foods[i].vitaminE * foods[i].servings;
+        dayReport["potassium"] += foods[i].potassium * foods[i].servings;
+        dayReport["magnesium"] += foods[i].magnesium * foods[i].servings;
+        dayReport["fiber"] += foods[i].fiber * foods[i].servings;
         // console.log(dayReport);
       }
 

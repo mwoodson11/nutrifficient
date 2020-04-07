@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SearchBar from './SearchBar';
-import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import ReactTable from 'react-table-6';
 import 'react-table-6/react-table.css';
 import {makeData, formatDate} from "./Utils";
-import {Link, withRouter} from 'react-router-dom';
 import { NUTRIENT_ENDPOINT } from "../../usdaAPI";
 import Popup from './Popup';
 
@@ -53,22 +51,11 @@ export default class FoodAvailable extends Component {
       }
 
       componentDidMount() {
-        // axios.get('http://localhost:5000/users/')
-        //     .then(response => {
-        //         if (response.data.length > 0) {
-        //         this.setState({ 
-        //             users: response.data.map(user => user.username),
-        //             username: response.data[0].username
-        //         });
-        //         }
-        // })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     })
 
         axios.get('http://localhost:5000/foods/pantry/'+this.props.username)
         .then(response => {
           this.setState({ foods: response.data });
+          console.log(response.data);
         })
         .catch((error) => {
             console.log(error);
@@ -82,14 +69,7 @@ export default class FoodAvailable extends Component {
       }
 
       handlePopupSubmit(e) {
-        // console.log(e)
-        // this.setState({
-        //   popupInput: e.target.value
-        // });
-        {/*Still need to query and edit the value */}
-        console.log("value");
-        
-        console.log(e.target);
+
         console.log(this.state.popupInput)
         const food = {
           servings: this.state.popupInput
@@ -173,7 +153,7 @@ export default class FoodAvailable extends Component {
       onSubmit(e) {
         e.preventDefault();
         const errors = validateServings(this.state.servings);
-        if (errors.length != 0) {
+        if (errors.length !== 0) {
           this.setState({errors});
           return;
         }
@@ -182,32 +162,31 @@ export default class FoodAvailable extends Component {
           .then(res => res.json())
           .then(listObj => {
             console.log(listObj);
-            var nutList = [];
             listObj.foodNutrients.forEach(nutr => {
               // console.log(nutr.nutrient);
-              if (nutr.nutrient.id == 1003) {
+              if (nutr.nutrient.id === 1003) {
                 this.setState({protein: nutr.amount});
-              } else if (nutr.nutrient.id == 1005) {
+              } else if (nutr.nutrient.id === 1005) {
                 this.setState({carbs: nutr.amount});
-              } else if (nutr.nutrient.id == 1004) {
+              } else if (nutr.nutrient.id === 1004) {
                 this.setState({fats: nutr.amount});
-              } else if (nutr.nutrient.id == 1093) {
+              } else if (nutr.nutrient.id === 1093) {
                 this.setState({sodium: nutr.amount});
-              } else if (nutr.nutrient.id == 1087) {
+              } else if (nutr.nutrient.id === 1087) {
                 this.setState({calcium: nutr.amount});
-              } else if (nutr.nutrient.id == 1162) {
+              } else if (nutr.nutrient.id === 1162) {
                 this.setState({vitaminC: nutr.amount});
-              } else if (nutr.nutrient.id == 1089) {
+              } else if (nutr.nutrient.id === 1089) {
                 this.setState({iron: nutr.amount});
-              } else if (nutr.nutrient.id == 1106) {
+              } else if (nutr.nutrient.id === 1106) {
                 this.setState({vitaminA: nutr.amount});
-              } else if (nutr.nutrient.id == 1109) {
+              } else if (nutr.nutrient.id === 1109) {
                 this.setState({vitaminE: nutr.amount});
-              } else if (nutr.nutrient.id == 1092) {
+              } else if (nutr.nutrient.id === 1092) {
                 this.setState({potassium: nutr.amount});
-              } else if (nutr.nutrient.id == 1090) {
+              } else if (nutr.nutrient.id === 1090) {
                 this.setState({magnesium: nutr.amount});
-              } else if (nutr.nutrient.id == 1079) {
+              } else if (nutr.nutrient.id === 1079) {
                 this.setState({fiber: nutr.amount});
               }
             })

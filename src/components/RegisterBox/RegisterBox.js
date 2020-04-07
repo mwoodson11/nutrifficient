@@ -1,6 +1,4 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import axios from 'axios';
 
 class RegisterBox extends React.Component {
@@ -39,7 +37,7 @@ class RegisterBox extends React.Component {
   submitRegister(e) {
     e.preventDefault();
     const errors = validate(this.state.username, this.state.email, this.state.password, this.state.password2);
-    if (errors.length != 0) {
+    if (errors.length !== 0) {
       this.setState({errors});
       return;
     }
@@ -135,7 +133,7 @@ class RegisterBox extends React.Component {
 
 function validate(username, email, password, password2) {
   const errors = [];
-  if (username.length == 0) {
+  if (username.length === 0) {
     errors.push("Name cannot be empty");
   }
   if (email.split("").filter(x => x === "@").length !== 1) {

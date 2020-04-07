@@ -1,19 +1,10 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import history from '../../history';
+import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import Welcome from "../Welcome/Welcome";
 import Homepage from "../Homepage/Homepage";
-
-
-const routes = (
-    <Router history={history}>                          
-        <Route path="/" component= {Welcome} />
-        <Route path="/Homepage" component= {Homepage} />
-    </Router>
-)
 
 
 class App extends React.Component{

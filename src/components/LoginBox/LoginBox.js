@@ -1,13 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import {createBrowserHistory} from 'history';
 import "bootstrap/dist/css/bootstrap.min.css";
-import history from '../../history';
 import App from '../App/App';
-import Homepage from '../Homepage/Homepage';
 import './LoginBox.css';
 
 class LoginBox extends React.Component {
@@ -37,7 +32,7 @@ class LoginBox extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     let error = validate(this.state.username, this.state.password);
-    if (error.length != 0) {
+    if (error.length !== 0) {
       this.setState({errors: error});
       return;
     }
@@ -54,7 +49,7 @@ class LoginBox extends React.Component {
       console.log("Response Data")
       console.log(res.data)
       // this.setState({response: res.data})
-      if (res.data.length == 0) {
+      if (res.data.length === 0) {
         let error = ["User/Password combination not found. Please try again."];
         console.log("Error")
         console.log(error)
@@ -128,13 +123,13 @@ function validate(username, password) {
   var error = '';
   // verify username/passcode
 
-  if (username == '') {
+  if (username === '') {
     error = 'Please write a username';
     console.log(error);
     errors.push(error);
   } 
 
-  if (password == '') {
+  if (password === '') {
     error = 'Please write a password';
     console.log(error);
     errors.push(error);

@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import LoginBox from '../LoginBox/LoginBox';
 import RegisterBox from '../RegisterBox/RegisterBox';
 import "./Welcome.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import App from '../App/App';
+import { BrowserRouter as Router } from "react-router-dom";
 import Logo from '../images/logo.png';
 
 class Welcome extends React.Component {

@@ -161,9 +161,9 @@ export default class NutrientTracker extends Component {
                 countPot = 0;
                 countFib = 0;
 
-                console.log(this.state.date);
+                // console.log(this.state.date);
                 var date = formatDate(this.state.date);
-                console.log(date);
+                // console.log(date);
 
                 // console.log(countPro);
                 this.state.foods.forEach(food => {
@@ -171,7 +171,7 @@ export default class NutrientTracker extends Component {
                     // console.log(food.date.substring(0,10))
                     // var d = new Date();
                     // d.setDate( d.getDate() - 1 );
-                    if (date == food.date) {
+                    if (date === food.date) {
                         countPro += food.protein * food.servings;
                         countFat += food.fats * food.servings;
                         countCarb += food.carbs * food.servings;
@@ -189,29 +189,29 @@ export default class NutrientTracker extends Component {
                 });
 
                 var proRatio = calcRatio(countPro, proCal);
-                var proBrushes = (proRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var proBrushes = (proRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var fatRatio = calcRatio(countFat, fatCal);
-                var fatBrushes = (fatRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var fatBrushes = (fatRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var carbRatio = calcRatio(countCarb, carbCal);
-                var carbBrushes = (carbRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var carbBrushes = (carbRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var vitCRatio = calcRatio(countVitC, RecommendedVitaminC);
-                var vitCBrushes = (vitCRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var vitCBrushes = (vitCRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var ironRatio = calcRatio(countIron, RecommendedIron);
-                var ironBrushes = (ironRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var ironBrushes = (ironRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var calciumRatio = calcRatio(countCalcium, RecommendedCalcium);
-                var calciumBrushes = (calciumRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var calciumBrushes = (calciumRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var sodiumRatio = calcRatio(countSodium, RecommendedSodium);
-                var sodiumBrushes = (sodiumRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var sodiumBrushes = (sodiumRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var vitARatio = calcRatio(countVitA, RecommendedVitaminA);
-                var vitABrushes = (vitARatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var vitABrushes = (vitARatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var vitERatio = calcRatio(countVitE, RecommendedVitaminE);
-                var vitEBrushes = (vitERatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var vitEBrushes = (vitERatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var magRatio = calcRatio(countMag, RecommendedMagnesium);
-                var magBrushes = (magRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var magBrushes = (magRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var potRatio = calcRatio(countPot, RecommendedPotassium);
-                var potBrushes = (potRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var potBrushes = (potRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
                 var fibRatio = calcRatio(countFib, RecommendedFiber);
-                var fibBrushes = (fibRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+                var fibBrushes = (fibRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
 
 
 
@@ -278,7 +278,7 @@ export default class NutrientTracker extends Component {
 
       onChangeDate(dates) {
         // console.log(date.toISOString().substring(0,10));
-        console.log(formatDate(dates));
+        // console.log(formatDate(dates));
         var date = formatDate(dates);
         // date.setDate( date.getDate() - 1 );
         // console.log(date.toISOString().substring(0,10))
@@ -315,7 +315,7 @@ export default class NutrientTracker extends Component {
             // console.log((this.state.date).toISOString().substring(0,10))
             // console.log(food.date.substring(0,10))
 
-            if (date == food.date) {
+            if (date === food.date) {
                 countPro += food.protein * food.servings;
                 countFat += food.fats * food.servings;
                 countCarb += food.carbs * food.servings;
@@ -334,31 +334,31 @@ export default class NutrientTracker extends Component {
         // console.log(proCal);
 
         var proRatio = calcRatio(countPro, proCal);
-        var proBrushes = (proRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var proBrushes = (proRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var fatRatio = calcRatio(countFat, fatCal);
-        var fatBrushes = (fatRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var fatBrushes = (fatRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var carbRatio = calcRatio(countCarb, carbCal);
-        var carbBrushes = (carbRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var carbBrushes = (carbRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var vitCRatio = calcRatio(countVitC, RecommendedVitaminC);
-        var vitCBrushes = (vitCRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var vitCBrushes = (vitCRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var ironRatio = calcRatio(countIron, RecommendedIron);
-        var ironBrushes = (ironRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var ironBrushes = (ironRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var calciumRatio = calcRatio(countCalcium, RecommendedCalcium);
-        var calciumBrushes = (calciumRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var calciumBrushes = (calciumRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var sodiumRatio = calcRatio(countSodium, RecommendedSodium);
-        var sodiumBrushes = (sodiumRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var sodiumBrushes = (sodiumRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var vitARatio = calcRatio(countVitA, RecommendedVitaminA);
-        var vitABrushes = (vitARatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var vitABrushes = (vitARatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var vitERatio = calcRatio(countVitE, RecommendedVitaminE);
-        var vitEBrushes = (vitERatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var vitEBrushes = (vitERatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var magRatio = calcRatio(countMag, RecommendedMagnesium);
-        var magBrushes = (magRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var magBrushes = (magRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var potRatio = calcRatio(countPot, RecommendedPotassium);
-        var potBrushes = (potRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        var potBrushes = (potRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
         var fibRatio = calcRatio(countFib, RecommendedFiber);
-        var fibBrushes = (fibRatio == 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
-        console.log(proRatio);
-        console.log(magRatio);
+        var fibBrushes = (fibRatio === 100) ? ["#3377ff"] : ["#C0C0C0", "#3377ff"];
+        // console.log(proRatio);
+        // console.log(magRatio);
 
         // date.setDate( date.getDate() + 1 );
         this.setState({
@@ -420,7 +420,7 @@ export default class NutrientTracker extends Component {
     render() {
         return(
             <div>
-                {console.log(this.state)}
+                {/* {console.log(this.state)} */}
             <h3>Nutrient Tracker</h3>
             <div className="form-group">
             <label>Date: </label>

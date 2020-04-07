@@ -2,63 +2,63 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const proteinSymptoms = ["Edema", "Mood Changes", "Weakness/Fatigue", "Fatty Liver", "Flaky, Splitting, or Red skin", "Hair Issues(thinning, faded color, hair loss)", "Brittle Nails", "Loss of Muscle Mass", "Weakened Bones", "Stunted Growth", "Weakened Immune System", "Increased Appetite"];
-const proteinList = proteinSymptoms.map((proteinSymptoms) =>
-    <li>{proteinSymptoms}</li>
+const proteinList = proteinSymptoms.map((proteinSymptoms, index) =>
+    <li key={index}>{proteinSymptoms}</li>
 );
 
 const carbSymptoms = ["Lack of Energy", "Constipation", "Nausea", "Dizziness", "Headaches", "Bad Breath", "Sugar Cravings", "Loss of Appetite"];
-const carbsList = carbSymptoms.map((carbSymptoms) =>
-    <li>{carbSymptoms}</li>
+const carbsList = carbSymptoms.map((carbSymptoms, index) =>
+    <li key={index}>{carbSymptoms}</li>
 );
 
 const fatsSymptoms = ["Dry, Scaly skin", "Dry Eyes", "Poor Body Temperature Regulation", "Dry Hair", "Hair Loss", "Hormonal Problems", "Increased Hunger", "Mental Fatigue", "Fatigue"];
-const fatsList = fatsSymptoms.map((fatsSymptoms) =>
-    <li>{fatsSymptoms}</li>
+const fatsList = fatsSymptoms.map((fatsSymptoms, index) =>
+    <li key={index}>{fatsSymptoms}</li>
 );
 
 const sodiumSymptoms = ["Nausea", "Vomiting", "Confusion", "Drowsiness", "Irritability or Restlessness", "Muscle Weakness, Spasms, or Cramps", "Seizures", "Coma"];
-const sodiumList = sodiumSymptoms.map((sodiumSymptoms) =>
-    <li>{sodiumSymptoms}</li>
+const sodiumList = sodiumSymptoms.map((sodiumSymptoms, index) =>
+    <li key={index}>{sodiumSymptoms}</li>
 );
 
 const calciumSymptoms = ["Muscle Problems", "Fatigue", "Dry, Itchy Skin", "Dry, Brittle Nails", "Osteoporosis", "Osteopenia", "Depression", "Tooth Decay"];
-const calciumList = calciumSymptoms.map((calciumSymptoms) =>
-    <li>{calciumSymptoms}</li>
+const calciumList = calciumSymptoms.map((calciumSymptoms, index) =>
+    <li key={index}>{calciumSymptoms}</li>
 );
 
 const ironSymptoms = ["Tiredness", "Paleness", "Shortness of Breath", "Headaches", "Dizziness", "Dry or Damaged Hair and Skin", "Heart Palpitations", "Swelling or Soreness of Tongue and Mouth", "Restless Legs", "Brittle Nails", "Strange Cravings (ice, clay, dirt, chalk, paper)", "Anxiety", "Cold Hands and Feet", "Frequent Infections"];
-const ironList = ironSymptoms.map((ironSymptoms) =>
-    <li>{ironSymptoms}</li>
+const ironList = ironSymptoms.map((ironSymptoms, index) =>
+    <li key={index}>{ironSymptoms}</li>
 );
 
 const vitCSymptoms = ["Dry Skin", "Splitting Hair", "Swelling and Discoloration of Gums", "Sudden and Unexpected Bleeding from Gums", "Nosebleeds", "Poor Wound Healing", "Tooth Loss"];
-const vitCList = vitCSymptoms.map((vitCSymptoms) =>
-    <li>{vitCSymptoms}</li>
+const vitCList = vitCSymptoms.map((vitCSymptoms, index) =>
+    <li key={index}>{vitCSymptoms}</li>
 );
 
 const vitASymptoms = ["Dry Skin", "Dry Eyes", "Night Blindness", "Infertility", "Delayed Growth", "Throat or Chest Infections", "Poor Wound Healing", "Acne or Breakouts"];
-const vitAList = vitASymptoms.map((vitASymptoms) =>
-<li>{vitASymptoms}</li>
+const vitAList = vitASymptoms.map((vitASymptoms, index) =>
+    <li key={index}>{vitASymptoms}</li>
 );
 
 const vitESymptoms = ["Muscle Weakness", "Bad Coordination", "Numbness", "Vision Deterioration", "Weak Immune System"];
-const vitEList = vitESymptoms.map((vitESymptoms) =>
-<li>{vitESymptoms}</li>
+const vitEList = vitESymptoms.map((vitESymptoms, index) =>
+    <li key={index}>{vitESymptoms}</li>
 );
 
 const potassiumSymptoms = ["Weakness", "Fatigue", "Muscle Cramps or Spasms", "Digestive Problems", "Heart Palpitations", "Muscle Aches or Stiffness", "Tingling or Numbness", "Breathing Difficulties", "Mood Changes"];
-const potassiumList = potassiumSymptoms.map((potassiumSymptoms) =>
-<li>{potassiumSymptoms}</li>
+const potassiumList = potassiumSymptoms.map((potassiumSymptoms, index) =>
+    <li key={index}>{potassiumSymptoms}</li>
 );
 
 const magnesiumSymptoms = ["Nausea", "Vomiting", "Loss of Appetite", "Muscle Twitches or Cramps", "Mental Disorders", "Osteoporosis", "Fatigue", "Muscle Weakness", "High Blood Pressure", "Asthma", "Irregular Heartbeat"];
-const magnesiumList = magnesiumSymptoms.map((magnesiumSymptoms) =>
-<li>{magnesiumSymptoms}</li>
+const magnesiumList = magnesiumSymptoms.map((magnesiumSymptoms, index) =>
+    <li key={index}>{magnesiumSymptoms}</li>
 );
 
 const fiberSymptoms = ["Stomach Issues", "Constipation", "Weight Gain", "Blood Sugar Fluctuations", "Hunger after Eating", "High Cholesterol", "High Blood Pressure", "Inflammation", "Low Energy", "Nausea"];
-const fiberList = fiberSymptoms.map((fiberSymptoms) =>
-<li>{fiberSymptoms}</li>
+const fiberList = fiberSymptoms.map((fiberSymptoms, index) =>
+    <li key={index}>{fiberSymptoms}</li>
 );
 
 const DeficiencyCalculator = (property) => {

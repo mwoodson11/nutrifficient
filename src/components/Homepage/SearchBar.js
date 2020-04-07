@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { SEARCH_ENDPOINT } from "../../usdaAPI";
-import { formatedFoodQuery, kCalSum } from "./Utils";
+import { formatedFoodQuery } from "./Utils";
 // import SearchResults from "./SearchResults";
 
 
@@ -75,9 +75,7 @@ class SearchBar extends Component {
     const {
       foodQuery,
       apiSearchList,
-      apiSearchListIsLoaded,
-      selectedFoods,
-      kcalValues
+      apiSearchListIsLoaded
     } = this.state;
     return (
       <div className="app">

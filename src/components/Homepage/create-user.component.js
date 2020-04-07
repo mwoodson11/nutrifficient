@@ -43,18 +43,20 @@ export default class CreateUser extends Component {
 
           });
           console.log(response.data[0]);
-          if (this.state.gender == 1) {
+          if (this.state.gender === 1) {
             this.setState({genderId: "male"});
-          } else if (this.state.gender == 2) {
+          } else if (this.state.gender === 2) {
             this.setState({genderId: "female"});
+          } else {
+            this.setState({genderId: "N/A"});
           }
-          if (this.state.activity == 1.25) {
+          if (this.state.activity === 1.25) {
             this.setState({activityId: "Lightly Active"});
-          } else if (this.state.activity == 1.35) {
+          } else if (this.state.activity === 1.35) {
             this.setState({activityId: "Moderately Active"});
-          } else if (this.state.activity == 1.5) {
+          } else if (this.state.activity === 1.5) {
             this.setState({activityId: "Very Active"});
-          } else if (this.state.activity == 1.7) {
+          } else if (this.state.activity === 1.7) {
             this.setState({activityId: "Extremely Active"});
           } else {
             this.setState({activityId: "Sedentary"})
@@ -78,41 +80,41 @@ export default class CreateUser extends Component {
       }
 
       onChangeGender(e) {
-        if (e.target.value == "male") {
+        if (e.target.value === "male") {
           this.setState({
             genderId: "male",
             gender: 1
           });
-        } else if (e.target.value == "female") {
+        } else if (e.target.value === "female") {
           this.setState({
             genderId: "female",
             gender: 2
           });
         } else {
           this.setState({
-            genderId: "",
+            genderId: "N/A",
             gender: 0,
           });
         }
       }
 
       onChangeActivity(e) {
-        if (e.target.value == "Sedentary") {
+        if (e.target.value === "Sedentary") {
           this.setState({
             activityId: "Sedentary",
             activity: 1.1
           });
-        } else if (e.target.value == "Lightly Active") {
+        } else if (e.target.value === "Lightly Active") {
           this.setState({
             activityId: "Lightly Active",
             activity: 1.25
           });
-        } else if (e.target.value == "Moderately Active") {
+        } else if (e.target.value === "Moderately Active") {
           this.setState({
             activityId: "Moderately Active",
             activity: 1.35
           });
-        } else if (e.target.value == "Very Active") {
+        } else if (e.target.value === "Very Active") {
             this.setState({
               activityId: "Very Active",
               activity: 1.5
@@ -186,7 +188,7 @@ export default class CreateUser extends Component {
             <div className="form-group">
               <label>Gender:  </label><br></br>
                 <select value = {this.state.genderId} onChange = {this.onChangeGender}>
-                  <option value = ""></option>
+                  <option value = "N/A">N/A</option>
                   <option value = "male">Male</option>
                   <option value = "female">Female</option>
                 </select>

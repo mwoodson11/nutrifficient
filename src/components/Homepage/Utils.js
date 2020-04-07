@@ -1,5 +1,3 @@
-import React from "react";
-
 const range = len => {
   const arr = [];
   for (let i = 0; i < len; i++) {
@@ -33,7 +31,7 @@ export function makeData(len = 5553) {
 }
 
 const calCalc = (gender, weight, height, age) => {
-  if (gender == 1) {
+  if (gender === 1) {
     return 66 + (6.23 * weight) + (12.7 * height) - (6.8 * age);
   } else {
     return 655 + (4.35 * weight) + (4.7 * height) - (4.7 * age);
@@ -42,11 +40,16 @@ const calCalc = (gender, weight, height, age) => {
 
 const calcRatio = (loggedCals, totalCals) => {
   var val = loggedCals/totalCals;
-  console.log(val, loggedCals, totalCals);
-  if (val > 1) {
+  // console.log(val, loggedCals, totalCals);
+  if (val >= 1) {
     return 100;
   } else {
-    return Math.round(val * 100);
+    var temp = Math.round(val * 100);
+    if (temp > 96 && temp <= 99) {
+      return 96;
+    } else {
+      return temp;
+    }
   }
 }
 
