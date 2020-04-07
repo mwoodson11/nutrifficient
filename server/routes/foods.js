@@ -242,7 +242,7 @@ router.route('/deficiency/:username').get((req, res) => {
       sendReport["magnesium"] = dayReport["magnesium"] / days;
       sendReport["fiber"] = dayReport["fiber"] / days;
 
-      console.log(sendReport);
+      // console.log(sendReport);
 
       // can be used for purposes later to only look at more recent days instead of all days
       //   if(!defReport.hasOwnProperty(dateID)) {
