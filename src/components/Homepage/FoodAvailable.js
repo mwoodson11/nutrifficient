@@ -361,7 +361,7 @@ export default class FoodAvailable extends Component {
           </div> */}
 
           <div className="form-group">
-            <input type="submit" value="Create Food Log" className="btn btn-primary" />
+            <input type="submit" value="Add Item" className="btn btn-primary" />
           </div>
         </form>
       </div>
