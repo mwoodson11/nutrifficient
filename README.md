@@ -36,5 +36,9 @@ The main features for the front-end application are all located in the directory
 * Suggestions.js
 * Utils.js
 
-The main features for the back-end were the routes, located in the director server/routes. The files **foods.js** and **users.js** contain the majority of the routes used to get and post to mongoDB database, but the remaining file **servings.js** was used to convert foods retrieved from the USDA API to proper serving sizes so we would show useful information
+The main features for the back-end were the routes, located in the director server/routes. The following files contain the majority of the routes used to get and post to mongoDB database: 
+* foods.js
+* users.js 
+
+The remaining file in this directory, **servings.js**, was used to convert foods retrieved from the USDA API to proper serving sizes so we would show useful information. It is useful, but contains few routes.
 
