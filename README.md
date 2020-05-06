@@ -1,68 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Nutrifficient
 
-## Available Scripts
+## Project Description
 
-In the project directory, you can run:
+The nutrifficient application is designed to provide an application that helps people keep track of their nutrition history and provide useful features to fulfill daily goals. The main features of the app include:
+* Logging daily food consumption and show nutrition
+* Storing food pantry items
+* Reporting daily nutritional intake
+* Offering suggestions for what food to eat in your pantry to fulfill nutrition goals
+* Reporting nutritional deficiencies and list possible symptoms the user may be experiencing
 
+## How To Run
+
+The app can be run through the command line by first running the server, and then running the client.
+
+After cloning the github repository to your computer, open the command line and head to the project directory and change into the server directory. Install the dependencies and start the server by running:
+
+### `npm install`
+### `nodemon server`
+
+Now, open the command line and head to the project directory. Install the dependencies and start the app by running:
+
+### `npm install`
 ### `npm start`
 
-Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+To access the application, you will have to create an account, but for demo usage. The username **demo1234** and password **demo12** can be used.
 
-### `npm test`
+## Main Files
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The main features for the front-end application are all located in the directory src/components/Homepage. The following are the components that our project heavily focused on:
+* FoodAvailable.js
+* foods-list.component.js
+* NutrientTracker.js
+* Suggestions.js
+* Utils.js
 
-### `npm run build`
+The main features for the back-end were the routes, located in the director server/routes. The following files contain the majority of the routes used to get and post to mongoDB database: 
+* foods.js
+* users.js 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The remaining file in this directory, **servings.js**, was used to convert foods retrieved from the USDA API to proper serving sizes so we would show useful information. It is useful, but contains few routes.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
