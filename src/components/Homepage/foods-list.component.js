@@ -212,6 +212,25 @@ export default class FoodsList extends Component {
           data = {datas}
           columns = {[
             {
+              Header: "",
+              width: 100,
+              Cell: row => (
+                <div>
+                    <button onClick={() => this.handleDelete(row.original._id)}>Delete</button>
+                </div>
+              )
+            },
+            {
+              Header: "Date",
+              accessor: "date",
+              width: 100,
+              Cell: row => (
+                <div>
+                  {row.original.date}
+                </div>
+              )
+            },
+            {
               Header: "Description",
               accessor: "description",
               width: 300
@@ -340,26 +359,8 @@ export default class FoodsList extends Component {
                     {row.original.fiber * row.original.servings} mg
                 </div>
               )
-            },
-            {
-              Header: "Date",
-              accessor: "date",
-              width: 100,
-              Cell: row => (
-                <div>
-                  {row.original.date}
-                </div>
-              )
-            },
-            {
-              Header: "",
-              width: 100,
-              Cell: row => (
-                <div>
-                    <button onClick={() => this.handleDelete(row.original._id)}>Delete</button>
-                </div>
-              )
             }
+            
 
           ]}
           defaultPageSize = {20}

@@ -26,10 +26,10 @@ class App extends React.Component{
             <Router>
                 {/* <Route path = "/Homepage" component = {Homepage} /> */}
                 <Route
-                        path='/Homepage'
+                        path='/info'
                         render={(props) => <Homepage {...props} username={this.props.username} />}
                     />
-                <Redirect to = "/Homepage" />
+                <Redirect to = "/info" />
             </Router>
             );
         } else {

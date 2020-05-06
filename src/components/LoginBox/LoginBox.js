@@ -14,8 +14,8 @@ class LoginBox extends React.Component {
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      username: 'mwoodson7',
-      password: 'mwoodson7',
+      username: '',
+      password: '',
       // response: [],
       errors: []
     };

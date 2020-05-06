@@ -110,7 +110,7 @@ class RegisterBox extends React.Component {
             <div className="input-group">
               <label htmlFor="password2">Confirm Password</label>
               <input
-                type="password2"
+                type="password"
                 name="password2"
                 className="login-input"
                 placeholder="Password"

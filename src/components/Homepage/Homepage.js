@@ -9,6 +9,7 @@ import CreateUser from "./create-user.component";
 import DeficiencyCalculator from "./DeficiencyCalculator.component";
 import NutrientTracker from "./NutrientTracker";
 import Suggestions from "./Suggestions";
+import InfoPage from "./InfoPage";
 
 function Homepage(property){
     return(
@@ -17,6 +18,10 @@ function Homepage(property){
                 <Navbar />
                 <br/>
                 <Switch>
+                    <Route
+                        path='/info'
+                        render={(props) => <InfoPage {...props} username={property.username} />}
+                    />
                     <Route
                         path='/foodslist'
                         render={(props) => <FoodsList {...props} username={property.username} />}
