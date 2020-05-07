@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/nutrifficient/static/css/main.17899951.chunk.css",
+    "main.js": "/nutrifficient/static/js/main.a81067bb.chunk.js",
+    "main.js.map": "/nutrifficient/static/js/main.a81067bb.chunk.js.map",
+    "runtime-main.js": "/nutrifficient/static/js/runtime-main.b8d76d38.js",
+    "runtime-main.js.map": "/nutrifficient/static/js/runtime-main.b8d76d38.js.map",
+    "static/css/2.bc9c845d.chunk.css": "/nutrifficient/static/css/2.bc9c845d.chunk.css",
+    "static/js/2.27851560.chunk.js": "/nutrifficient/static/js/2.27851560.chunk.js",
+    "static/js/2.27851560.chunk.js.map": "/nutrifficient/static/js/2.27851560.chunk.js.map",
+    "index.html": "/nutrifficient/index.html",
+    "precache-manifest.5547966a26c12796468a67a8ac7b500c.js": "/nutrifficient/precache-manifest.5547966a26c12796468a67a8ac7b500c.js",
+    "service-worker.js": "/nutrifficient/service-worker.js",
+    "static/css/2.bc9c845d.chunk.css.map": "/nutrifficient/static/css/2.bc9c845d.chunk.css.map",
+    "static/css/main.17899951.chunk.css.map": "/nutrifficient/static/css/main.17899951.chunk.css.map",
+    "static/js/2.27851560.chunk.js.LICENSE.txt": "/nutrifficient/static/js/2.27851560.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b8d76d38.js",
+    "static/css/2.bc9c845d.chunk.css",
+    "static/js/2.27851560.chunk.js",
+    "static/css/main.17899951.chunk.css",
+    "static/js/main.a81067bb.chunk.js"
+  ]
+}
